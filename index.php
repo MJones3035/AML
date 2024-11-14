@@ -13,15 +13,6 @@
 <?php include("header.php"); ?>
 
     <main>
-        <section>
-            <h2>About This Site</h2>
-            <p>This is a simple example of an HTML index page. Here you can add a description of the website, introduce yourself, or provide some background information.</p>
-        </section>
-
-        <section>
-            <h2>Latest Updates</h2>
-            <p>Stay tuned for the latest updates. Check back here for news, updates, and more content!</p>
-        </section>
     </main>
 
 <?php include("footer.php") ?>
