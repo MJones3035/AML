@@ -25,7 +25,7 @@
 
                 <div class="d-flex ms-auto">
                     <a href="#" class="btn btn-outline-light me-2">Login</a>
-                    <a href="signUp.php" class="btn btn-primary">Sign Up</a>
+                    <a href="signup.php" class="btn btn-primary">Signup</a>
                 </div>
             </div>
         </nav>
