@@ -1,12 +1,6 @@
 <?php 
-// require_once("database.php");
-
-if (isset($_GET['loggedout'])) {
-    session_start();
-    unset($_SESSION['username']);
-    session_destroy();
-}
-
+require_once("database.php");
+require_once("session.php");
 ?>
 
 <head>
@@ -23,7 +17,7 @@ if (isset($_GET['loggedout'])) {
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
 
-                <a class="navbar-brand me-3" href="index.php">Advanced Media Library</a>
+                <a class="navbar-brand me-3" href="userIndex.php">Advanced Media Library</a>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
@@ -33,8 +27,8 @@ if (isset($_GET['loggedout'])) {
                 </div>
 
                 <div class="d-flex ms-auto">
-                    <a href="login.php" class="btn btn-outline-light me-2">Login</a>
-                    <a href="signup.php" class="btn btn-primary">Signup</a>
+                    <a href="#" class="btn btn-outline-light me-2">Account</a>
+                    <a href="index.php?loggedout=1" class="btn btn-primary">Logout</a>
                 </div>
             </div>
         </nav>

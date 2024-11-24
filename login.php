@@ -12,6 +12,10 @@ if (isset($_POST['submit'])) {
 
 
     if (Authorise($username, $password) == AuthoriseStates::MATCH) {
+
+        session_start();
+
+        $_SESSION['username'] = $username;
         
         header('Location: userIndex.php');
     }
