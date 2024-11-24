@@ -1,9 +1,12 @@
 <?php 
 
-    define("DB_SERVER", "localhost");
-    define("DB_USERNAME", "root");
-    define("DB_NAME", "aml_db");
-    define("DB_PASSWORD", "");
+    if (!defined('DB_SERVER')){
+        define("DB_SERVER", "localhost");
+        define("DB_USERNAME", "root");
+        define("DB_NAME", "aml_db");
+        define("DB_PASSWORD", "");
+    }
+
 
     try {
         $db_conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
