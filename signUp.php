@@ -143,31 +143,31 @@ if (isset($_POST['submit'])) {
                         <div class="form-group mb-3">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" id="username" name="username"
-                                placeholder="Enter a username" value=<?php echo $_POST['username'] ?>>
-                            <span class="text-danger"><?php echo $errorUsername; ?></span>
+                                placeholder="Enter a username" value=<?php if(isset($_POST['username'])){ echo $_POST['username']; }?>>
+                            <span class="text-danger"><?php echo $errorUsername;?></span>
                         </div>
                         <div class="form-group mb-3">
                             <label for="firstname" class="form-label">First Name</label>
                             <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter your first name"
-                            value=<?php echo $_POST['firstname'] ?>>
+                            value=<?php if(isset($_POST['firstname'])){ echo $_POST['firstname'];}  ?>>
                             <span class="text-danger"><?php echo $errorFirstName; ?></span>
                         </div>
                         <div class="form-group mb-3">
                             <label for="lastname" class="form-label">Last Name</label>
                             <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter your last name"
-                            value=<?php echo $_POST['lastname'] ?>>
+                            value=<?php if(isset($_POST['lastname'])){ echo $_POST['lastname'];}  ?>>
                             <span class="text-danger"><?php echo $errorLastName; ?></span>
                         </div>
                         <div class="form-group mb-3">
                             <label for="dateofbirth" class="form-label">Date of Birth</label>
                             <input type="date" class="form-control" id="dateofbirth" name="dateofbirth"
-                                placeholder="Enter your date of birth" value=<?php echo $_POST['dateofbirth'] ?>>
+                                placeholder="Enter your date of birth" value=<?php if(isset($_POST['dateofbirth'])){ echo $_POST['dateofbirth'];}  ?>>
                             <span class="text-danger"><?php echo $errorDateOfBirth; ?></span>
                         </div>
                         <div class="form-group mb-3">
                             <label for="email" class="form-label">Email Address</label>
                             <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email"
-                            value=<?php echo $_POST['email'] ?>>
+                            value=<?php if(isset($_POST['email'])){ echo $_POST['email'];}  ?>>
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
                                 else.</small>
                             <span class="text-danger"><?php echo $errorEmail; ?></span>
@@ -175,31 +175,31 @@ if (isset($_POST['submit'])) {
                         <div class="form-group mb-3">
                             <label for="phone" class="form-label">Telephone Number</label>
                             <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your telephone number"
-                            value=<?php echo $_POST['phone'] ?>>
+                            value=<?php if(isset($_POST['phone'])){ echo $_POST['phone'];}  ?>>
                             <span class="text-danger"><?php echo $errorPhone; ?></span>
                         </div>
                         <div class="form-group mb-3">
                             <label for="address" class="form-label">Address</label>
                             <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address"
-                            value=<?php echo $_POST['address'] ?>>
+                            value=<?php if(isset($_POST['address'])){ echo $_POST['address'];}  ?>>
                             <span class="text-danger"><?php echo $errorAddress; ?></span>
                         </div>
                         <div class="form-group mb-3">
                             <label for="postcode" class="form-label">Postcode</label>
                             <input type="text" class="form-control" id="postcode" name="postcode" placeholder="Enter your postcode"
-                            value=<?php echo $_POST['postcode'] ?>>
+                            value=<?php if(isset($_POST['postcode'])){ echo $_POST['postcode'];}  ?>>
                             <span class="text-danger"><?php echo $errorPostcode; ?></span>
                         </div>
                         <div class="form-group mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Password"
-                            value=<?php echo $_POST['password'] ?>>
+                            value=<?php if(isset($_POST['password'])){ echo $_POST['password']; } ?>>
                             <span class="text-danger"><?php echo $errorPassword; ?></span>
                         </div>
                         <div class="form-group mb-3">
                             <label for="confirmpassword" class="form-label">Confirm Password</label>
                             <input type="password" class="form-control" id="confirmpassword" name="confirmpassword"
-                                placeholder="Confirm password" value=<?php echo $_POST['confirmpassword'] ?>>
+                                placeholder="Confirm password" value=<?php if(isset($_POST['confirmpassword'])){ echo $_POST['confirmpassword']; }?>>
                                 <span class="text-danger"><?php echo $errorConfirmPassword; ?></span>
                         </div>
                         <!-- <div class="form-check mb-3">

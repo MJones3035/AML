@@ -11,6 +11,46 @@ enum Roles {
     case ADMIN;
 }
 
+enum AuthoriseStates {
+    case MATCH;
+    case INVALID_PASSWORD;
+    case INVALID_BOTH;
+}
+
+function Authorise($username, $password) {
+
+    $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+    $sql = '(SELECT * FROM user_credentials WHERE username=?)';
+
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bind_param(
+        's',
+        $username
+    );
+
+    $stmt->execute();
+
+    $arr= $stmt->get_result()->fetch_assoc();
+
+    if ($arr){
+        $passwordMatch = password_verify($password, $arr['password']);
+
+        $conn->close();
+
+            if ($arr and $passwordMatch) {
+                return AuthoriseStates::MATCH;
+            }
+            else {
+                return AuthoriseStates::INVALID_PASSWORD;
+            }
+    }
+    else {
+        return AuthoriseStates::INVALID_BOTH;
+    }
+
+}
+
 function UsernameExists($username) {
 
     $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
@@ -26,10 +66,10 @@ function UsernameExists($username) {
 
     $stmt->execute();
 
-    $stmtRes = $stmt->get_result()->fetch_row();
+    $row = $stmt->get_result()->fetch_row();
 
     //bool
-    $res = $stmtRes[0];
+    $res = $row[0];
 
     $conn->close();
 
