@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2024 at 09:01 PM
+-- Generation Time: Nov 25, 2024 at 02:31 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,6 +24,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `media_details`
+--
+
+CREATE TABLE `media_details` (
+  `media_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(60) NOT NULL,
+  `image_url` varchar(120) NOT NULL,
+  `type` enum('book','magazine','film','video_game','newspaper') NOT NULL DEFAULT 'book'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_credentials`
 --
 
@@ -40,7 +53,8 @@ CREATE TABLE `user_credentials` (
 INSERT INTO `user_credentials` (`user_id`, `username`, `password`) VALUES
 (12, 'user8', '$2y$10$EjZpc/A.g2JAqO1OK8EaLe.tT6mGu6UkSnMEMz6TW72b/2s9KPYWi'),
 (13, 'user9', '$2y$10$fdlJ1xB1ESbcVVNXKSHnfOeaJXTz0EltqOptOLckkydKst4ZX9bjy'),
-(14, 'user10', '$2y$10$nqv5jTELApWBYtKfIBmQouSIHxYoxiSQ6GVDoGzJd2ikOfU8NivJ2');
+(14, 'user10', '$2y$10$nqv5jTELApWBYtKfIBmQouSIHxYoxiSQ6GVDoGzJd2ikOfU8NivJ2'),
+(15, 'user11', '$2y$10$M16g8l0k67YPBlvK7ARszOsOYQ3pHiGA61bmuS.5PKb9rnSzrb8wO');
 
 -- --------------------------------------------------------
 
@@ -66,7 +80,8 @@ CREATE TABLE `user_details` (
 INSERT INTO `user_details` (`user_id`, `first_name`, `last_name`, `date_of_birth`, `email`, `address`, `postcode`, `phone_number`) VALUES
 (12, 'bob', 'bob', '2024-11-06', 'bob@email', '011', '011', '11'),
 (13, 'bob', 'bob', '2024-11-06', 'bob@email', '011', '011', '11'),
-(14, 'bob', 'bob', '2024-11-06', 'bob@email', '011', '011', '11');
+(14, 'bob', 'bob', '2024-11-06', 'bob@email', '011', '011', '11'),
+(15, 'aa', 'aa', '2024-11-12', 'aa@email.com', '11', '11', '11');
 
 -- --------------------------------------------------------
 
@@ -90,11 +105,18 @@ CREATE TABLE `user_privileges` (
 INSERT INTO `user_privileges` (`user_id`, `is_branch_librarian`, `is_branch_manager`, `is_purchase_manager`, `is_accountant`, `is_admin`) VALUES
 (12, 0, 0, 0, 0, 0),
 (13, 0, 0, 0, 0, 0),
-(14, 0, 0, 0, 0, 0);
+(14, 0, 0, 0, 0, 0),
+(15, 0, 0, 0, 0, 0);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `media_details`
+--
+ALTER TABLE `media_details`
+  ADD PRIMARY KEY (`media_id`);
 
 --
 -- Indexes for table `user_credentials`
@@ -123,10 +145,16 @@ ALTER TABLE `user_privileges`
 --
 
 --
+-- AUTO_INCREMENT for table `media_details`
+--
+ALTER TABLE `media_details`
+  MODIFY `media_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `user_credentials`
 --
 ALTER TABLE `user_credentials`
-  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
