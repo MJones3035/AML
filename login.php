@@ -11,24 +11,22 @@ if (isset($_POST['submit'])) {
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
 
 
-    if (Authorise($username, $password) == AuthoriseStates::MATCH) {
+    if (!$username or !$password)
+    {
+        $error = "Invalid username or password";
+    }
+    elseif (Authorise($username, $password) == AuthoriseStates::MATCH) {
 
         session_start();
 
         $_SESSION['username'] = $username;
-        
+
         header('Location: userIndex.php');
-    }
-    else if (Authorise($username, $password) == AuthoriseStates::INVALID_PASSWORD) {
+    } else if (Authorise($username, $password) == AuthoriseStates::INVALID_PASSWORD) {
         $error = "Invalid password";
-    }
-    else {
+    } else {
         $error = "Invalid username and password";
-}
-
-
-
-    
+    }
 }
 
 ?>
@@ -49,20 +47,29 @@ if (isset($_POST['submit'])) {
                         <div class="form-group mb-3">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" id="username" name="username"
-                                placeholder="Enter a username" value=<?php if(isset($_POST['username'])){ echo $_POST['username']; } ?>>
+                                placeholder="Enter a username" value=<?php if (isset($username)) {
+                                                                            echo $username;
+                                                                        } ?>>
                             <span class="text-danger"><?php echo $errorUsername; ?></span>
                         </div>
                         <div class="form-group mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                             <span class="text-danger"><?php echo $errorPassword; ?></span>
+
+                        </div>
+                        <div class="pb-3">
+                            <p><a class="link-opacity-75" href="forgotPassword.php">Forgot password?</a></p>
                         </div>
                         <!-- <div class="form-check mb-3">
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                             <label class="form-check-label" for="exampleCheck1">Remember me</label>
                         </div> -->
-                        <button type="submit" class="btn btn-primary w-100" name="submit" value="true">Sign Up</button>
-                        <span class="text-danger"><?php echo $error; ?></span>
+                        <div> 
+                            <button type="submit" class="btn btn-primary w-100" name="submit" value="true">Login</button>
+                            <span class="text-danger"><?php echo $error; ?></span>
+                        </div>
+
                     </form>
                 </div>
             </div>
