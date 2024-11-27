@@ -3,7 +3,7 @@
     if (!defined('DB_SERVER')){
         define("DB_SERVER", "localhost");
         define("DB_USERNAME", "root");
-        define("DB_NAME", "aml_db");
+        define("DB_NAME", "aml");
         define("DB_PASSWORD", "");
     }
 
