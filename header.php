@@ -35,7 +35,6 @@ if (isset($_GET['loggedout'])) {
                 <div class="d-flex ms-auto">
                     <a href="login.php" class="btn btn-outline-light me-2">Login</a>
                     <a href="signup.php" class="btn btn-primary">Signup</a>
-                    <a href="account.php" class="btn btn-primary">Account</a>
                 </div>
             </div>
         </nav>

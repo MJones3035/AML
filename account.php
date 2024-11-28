@@ -35,7 +35,7 @@ $db_conn->close();
 
 
 <body>
-    <?php include("header.php"); ?> 
+    <?php include("userheader.php"); ?> 
 
     <main class="container pt-5 pb-5 d-flex flex-wrap flex-column align-content-center">
         <h1>Account Information</h1>
