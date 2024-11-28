@@ -1,43 +1,33 @@
 <?php
 include_once("accountSQL.php");
 
+session_start(); 
+
 $errorUsername = $errorPassword = $error = "";
 
 if (isset($_POST['submit'])) {
-
-
     // security measures
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
 
+    $authResult = Authorise($username, $password);
 
-    if (!$username or !$password)
-    {
-        $error = "Invalid username or password";
-    }
-    elseif (Authorise($username, $password) == AuthoriseStates::MATCH) {
-
-        session_start();
-
-        $_SESSION['username'] = $username;
-
-        header('Location: userIndex.php');
-    } else if (Authorise($username, $password) == AuthoriseStates::INVALID_PASSWORD) {
+    if ($authResult['status'] == AuthoriseStates::MATCH) {
+        $_SESSION['user_id'] = $authResult['user_id']; // Store user ID in session
+        header("Location: account.php");
+        exit(); 
+    } else if ($authResult['status'] == AuthoriseStates::INVALID_PASSWORD) {
         $error = "Invalid password";
     } else {
         $error = "Invalid username and password";
     }
 }
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <body class="d-flex flex-column min-vh-100">
-
     <?php include("header.php"); ?>
-
     <main class="container pt-5 pb-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -75,8 +65,6 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
     </main>
-
     <?php include("footer.php"); ?>
 </body>
-
 </html>

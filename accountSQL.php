@@ -12,43 +12,30 @@ enum Roles {
 }
 
 enum AuthoriseStates {
-    case MATCH;
-    case INVALID_PASSWORD;
-    case INVALID_BOTH;
+    const MATCH = 1;
+    const INVALID_PASSWORD = 2;
+    const INVALID_BOTH = 3;
 }
 
 function Authorise($username, $password) {
-
     $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-    $sql = '(SELECT * FROM user_credentials WHERE username=?)';
 
+    $sql = 'SELECT user_id, password FROM user_credentials WHERE username=?';
     $stmt = $conn->prepare($sql);
-
-    $stmt->bind_param(
-        's',
-        $username
-    );
-
+    $stmt->bind_param('s', $username);
     $stmt->execute();
+    $result = $stmt->get_result();
 
-    $arr= $stmt->get_result()->fetch_assoc();
-
-    if ($arr){
-        $passwordMatch = password_verify($password, $arr['password']);
-
-        $conn->close();
-
-            if ($arr and $passwordMatch) {
-                return AuthoriseStates::MATCH;
-            }
-            else {
-                return AuthoriseStates::INVALID_PASSWORD;
-            }
+    if ($result->num_rows == 1) {
+        $row = $result->fetch_assoc();
+        if (password_verify($password, $row['password'])) {
+            return ['status' => AuthoriseStates::MATCH, 'user_id' => $row['user_id']];
+        } else {
+            return ['status' => AuthoriseStates::INVALID_PASSWORD];
+        }
+    } else {
+        return ['status' => AuthoriseStates::INVALID_BOTH];
     }
-    else {
-        return AuthoriseStates::INVALID_BOTH;
-    }
-
 }
 
 function UsernameExists($username) {
