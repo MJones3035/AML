@@ -1,41 +1,23 @@
 <?php
-include 'database.php';
+include_once 'accountSQL.php';
 
 session_start(); 
 
 // Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['userID'])) {
     echo "You are not logged in.";
     exit;
 }
-
-// Get the current user's ID from the session
-$user_id = $_SESSION['user_id'];
-
-// query users information
-$query = "SELECT * FROM user_details WHERE user_id = ?";
-$stmt = $db_conn->prepare($query);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-
-// Check if the user exists
-if ($result->num_rows == 0) {
-    echo "User not found.";
-    exit;
+else {
+    $user = GetAccount($_SESSION['userID']);
 }
 
-// Fetch the user's information
-$user = $result->fetch_assoc();
 
-// Close the statement and connection
-$stmt->close();
-$db_conn->close();
 ?>
 
 
 <body>
-    <?php include("userheader.php"); ?> 
+    <?php include("userHeader.php"); ?> 
 
     <main class="container pt-5 pb-5 d-flex flex-wrap flex-column align-content-center">
         <h1>Account Information</h1>

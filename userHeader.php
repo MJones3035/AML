@@ -28,7 +28,7 @@ require_once("session.php");
 
                 <div class="d-flex ms-auto">
                     <a href="account.php" class="btn btn-outline-light me-2">Account</a>
-                    <a href="index.php?loggedout=1" class="btn btn-primary">Logout</a>
+                    <a href="index.php?loggedOut=1" class="btn btn-primary">Logout</a>
                 </div>
             </div>
         </nav>

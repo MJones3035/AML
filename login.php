@@ -13,8 +13,8 @@ if (isset($_POST['submit'])) {
     $authResult = Authorise($username, $password);
 
     if ($authResult['status'] == AuthoriseStates::MATCH) {
-        $_SESSION['user_id'] = $authResult['user_id']; // Store user ID in session
-        header("Location: userindex.php");
+        $_SESSION['userID'] = $authResult['user_id']; // Store user ID in session
+        header("Location: userIndex.php");
         exit(); 
     } else if ($authResult['status'] == AuthoriseStates::INVALID_PASSWORD) {
         $error = "Invalid password";

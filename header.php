@@ -1,9 +1,9 @@
 <?php 
 // require_once("database.php");
 
-if (isset($_GET['loggedout'])) {
+if (isset($_GET['loggedOut'])) {
     session_start();
-    unset($_SESSION['username']);
+    unset($_SESSION['userId']);
     session_destroy();
 }
 

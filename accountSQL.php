@@ -38,6 +38,32 @@ function Authorise($username, $password) {
     }
 }
 
+function GetAccount($userID) {
+
+    $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+
+    $query = "SELECT * FROM user_details WHERE user_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $userID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Check if the user exists
+    if ($result->num_rows == 0) {
+        echo "User not found.";
+        exit;
+    }
+
+    // Fetch the user's information
+    $userData = $result->fetch_assoc();
+
+    // Close the statement and connection
+    $stmt->close();
+    $conn->close();
+
+    return $userData;
+}
+
 function UsernameExists($username) {
 
     $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
