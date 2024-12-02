@@ -90,9 +90,14 @@ function UsernameExists($username) {
 
 }
 
-function CreateProfile($data, $role)
+function GenerateRandomCode($size = 16): string {
+    return bin2hex(random_bytes($size));
+}
+
+function CreateAccount($data, $role, $expiry = 1 * 24 * 60 * 60, )
 {
-    $created = false;
+    // credentials
+    $created = true;
     $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
     $sql = 'INSERT INTO user_credentials(username, password) VALUES (?,?)';
 
@@ -110,17 +115,39 @@ function CreateProfile($data, $role)
 
     $stmt->execute();
 
+    if (!$stmt) {
+        $created = false;
+    }
+
+    // activation
+    $sql = 'INSERT INTO user_activation(user_id, activation_code, activation_expiry) VALUES (?,?,?)';
+
+    $stmt = $conn->prepare($sql);
+
+    $lastID = mysqli_insert_id($conn);
+    $activationCode = GenerateRandomCode();
+    $expiryDate = date(('Y-m-d H:i:s'), time() + $expiry);
+
+    $stmt->bind_param(
+        'iss',
+        $lastID,
+        $activationCode,
+        $expiryDate
+
+    );
+
+    $stmt->execute();
+
     if ($stmt) {
         $created = true;
     }
 
+    // details
     $sql = 'INSERT INTO user_details(user_id, first_name, last_name, date_of_birth, email, address, postcode, phone_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
 
     $stmt = $conn->prepare($sql);
 
     $passwordHash = password_hash($data['password'], PASSWORD_BCRYPT);
-
-    $lastID = mysqli_insert_id($conn);
 
     $stmt->bind_param(
         'issssssi',
@@ -137,10 +164,11 @@ function CreateProfile($data, $role)
 
     $stmt->execute();
 
-    if ($stmt) {
-        $created = true;
+    if (!$stmt) {
+        $created = false;
     }
 
+    // privileges
     $sql = 'INSERT INTO user_privileges(user_id, is_branch_librarian, is_branch_manager, is_purchase_manager, is_accountant, is_admin) VALUES (?, ?, ?, ?, ?, ?)';
 
     $stmt = $conn->prepare($sql);
@@ -165,8 +193,8 @@ function CreateProfile($data, $role)
 
     $stmt->execute();
 
-    if ($stmt) {
-        $created = true;
+    if (!$stmt) {
+        $created = false;
     }
 
     $conn->close();

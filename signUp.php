@@ -1,7 +1,8 @@
 <?php
 include_once("accountSQL.php");
+include_once("emailSQL.php");
 
-$errorUsername = $errorFirstName = $errorLastName = $errorDateOfBirth = $errorEmail = $errorAddress = $errorPostcode = $errorPhone = $errorPassword = $errorConfirmPassword = "";
+$errorMessage = $errorUsername = $errorFirstName = $errorLastName = $errorDateOfBirth = $errorEmail = $errorAddress = $errorPostcode = $errorPhone = $errorPassword = $errorConfirmPassword = "";
 
 $allFields = TRUE;
 
@@ -22,8 +23,7 @@ if (isset($_POST['submit'])) {
         $errorUsername = "Username is mandatory";
 
         $allFields = FALSE;
-    }
-    elseif (!$username) {
+    } elseif (!$username) {
         $errorUsername = "Invalid username";
         $allFields = FALSE;
     }
@@ -33,8 +33,7 @@ if (isset($_POST['submit'])) {
         $errorFirstName = "First name is mandatory";
 
         $allFields = FALSE;
-    }
-    elseif (!$firstName) {
+    } elseif (!$firstName) {
         $errorFirstname = "Invalid first name";
         $allFields = FALSE;
     }
@@ -44,8 +43,7 @@ if (isset($_POST['submit'])) {
         $errorLastName = "Last name is mandatory";
 
         $allFields = FALSE;
-    }
-    elseif (!$lastName) {
+    } elseif (!$lastName) {
         $errorLastName = "Invalid last name";
         $allFields = FALSE;
     }
@@ -62,8 +60,7 @@ if (isset($_POST['submit'])) {
         $errorPhone = "Phone is mandatory";
 
         $allFields = FALSE;
-    }
-    elseif (!$phone) {
+    } elseif (!filter_var($phone, FILTER_VALIDATE_INT)) {
         $errorPhone = "Invalid phone number";
         $allFields = FALSE;
     }
@@ -73,8 +70,7 @@ if (isset($_POST['submit'])) {
         $errorEmail = "Email is mandatory";
 
         $allFields = FALSE;
-    }
-    elseif (!$email) {
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errorEmail = "Invalid email";
         $allFields = FALSE;
     }
@@ -84,8 +80,7 @@ if (isset($_POST['submit'])) {
         $errorAddress = "Address is mandatory";
 
         $allFields = FALSE;
-    }
-    elseif (!$address) {
+    } elseif (!$address) {
         $errorAddress = "Invalid address";
         $allFields = FALSE;
     }
@@ -95,8 +90,7 @@ if (isset($_POST['submit'])) {
         $errorPostcode = "Postcode is mandatory";
 
         $allFields = FALSE;
-    }
-    elseif (!$postcode) {
+    } elseif (!$postcode) {
         $errorPostcode = "Invalid postcode";
         $allFields = FALSE;
     }
@@ -119,6 +113,7 @@ if (isset($_POST['submit'])) {
     if ($allFields == TRUE) {
 
 
+        $activationCode = GenerateRandomCode();
         $data = array(
             'username' => $username,
             'firstname' => $firstName,
@@ -128,7 +123,8 @@ if (isset($_POST['submit'])) {
             'email' => $email,
             'address' => $address,
             'postcode' => $postcode,
-            'password' => $password
+            'password' => $password,
+            'activationcode' => $activationCode
         );
 
         //var_dump($data);
@@ -136,10 +132,16 @@ if (isset($_POST['submit'])) {
         //  echo UsernameExists($username);
 
         if (!UsernameExists($username)) {
-            // creates user profile
-            $createUser = CreateProfile($data, Roles::USER);
+            // creates user account
+            $createUser = CreateAccount($data, Roles::USER);
+                
+            if ($createUser) {
+                SendActivationEmail($email, $activationCode);
+            }
 
             header('Location: index.php?createdAccount=' . $createUser);
+            
+
         } else {
             $errorUsername = "Username already exists";
         }
@@ -229,18 +231,13 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="form-group mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" maxlength="255" placeholder="Password"
-                                value=<?php if (isset($password)) {
-                                            echo $password;
-                                        } ?>>
+                            <input type="password" class="form-control" id="password" name="password" maxlength="255" placeholder="Password">
                             <span class="text-danger"><?php echo $errorPassword; ?></span>
                         </div>
                         <div class="form-group mb-3 pb-3">
                             <label for="confirmpassword" class="form-label">Confirm Password</label>
                             <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" maxlength="60"
-                                placeholder="Confirm password" value=<?php if (isset($confirmPassword)) {
-                                                                            echo $confirmPassword;
-                                                                        } ?>>
+                                placeholder="Confirm password">
                             <span class="text-danger"><?php echo $errorConfirmPassword; ?></span>
                         </div>
                         <!-- <div class="form-check mb-3">
@@ -249,6 +246,7 @@ if (isset($_POST['submit'])) {
                         </div> -->
                         <div>
                             <button type="submit" class="btn btn-primary w-100" name="submit" value="true">Sign Up</button>
+                            <span class="text-danger"><?php echo $errorMessage; ?></span>
                         </div>
 
                     </form>

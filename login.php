@@ -12,7 +12,10 @@ if (isset($_POST['submit'])) {
 
     $authResult = Authorise($username, $password);
 
+
+
     if ($authResult['status'] == AuthoriseStates::MATCH) {
+        session_regenerate_id();
         $_SESSION['userID'] = $authResult['user_id']; // Store user ID in session
         header("Location: userIndex.php");
         exit(); 
