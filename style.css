@@ -8,3 +8,15 @@
     bottom: 0;
     width: 100%;
 } */
+
+.custom-card {
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 0.25rem;
+}
+.custom-card-body {
+    padding: 1.25rem;
+}
+
