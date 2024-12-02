@@ -204,4 +204,16 @@ function CreateAccount($data, $role, $expiry = 1 * 24 * 60 * 60, )
 
 }
 
+function UpdateAccount($userID, $first_name, $last_name, $date_of_birth, $email, $address, $postcode, $phone_number) {
+    $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+
+    $query = "UPDATE user_details SET first_name = ?, last_name = ?, date_of_birth = ?, email = ?, address = ?, postcode = ?, phone_number = ? WHERE user_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("sssssssi", $first_name, $last_name, $date_of_birth, $email, $address, $postcode, $phone_number, $userID);
+    $stmt->execute();
+
+    $stmt->close();
+    $conn->close();
+}
+
 ?>

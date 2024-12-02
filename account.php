@@ -1,16 +1,20 @@
 <?php
 include_once 'accountSQL.php';
+//include_once 'session.php';
+include("userHeader.php");
 
-session_start(); 
+//session_start(); 
 
 // Check if the user is logged in
-if (!isset($_SESSION['userID'])) {
-    echo "You are not logged in.";
-    exit;
-}
-else {
-    $user = GetAccount($_SESSION['userID']);
-}
+// if (!isset($_SESSION['userID'])) {
+//     echo "You are not logged in.";
+//     exit;
+// }
+// else {
+//     $user = GetAccount($_SESSION['userID']);
+// }
+
+$user = GetAccount($_SESSION['userID']);
 
 $confirmationMessage = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -41,22 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-function UpdateAccount($userID, $first_name, $last_name, $date_of_birth, $email, $address, $postcode, $phone_number) {
-    $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
-    $query = "UPDATE user_details SET first_name = ?, last_name = ?, date_of_birth = ?, email = ?, address = ?, postcode = ?, phone_number = ? WHERE user_id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("sssssssi", $first_name, $last_name, $date_of_birth, $email, $address, $postcode, $phone_number, $userID);
-    $stmt->execute();
-
-    $stmt->close();
-    $conn->close();
-}
 ?>
 
 
 <body>
-    <?php include("userHeader.php"); ?> 
     <div class="container pt-5 pb-5 d-flex justify-content-center">
         <div class="card custom-card">
             <div class="card-header">
@@ -111,8 +103,6 @@ function UpdateAccount($userID, $first_name, $last_name, $date_of_birth, $email,
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 
     <script>
         $(document).ready(function() {

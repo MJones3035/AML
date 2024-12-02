@@ -3,7 +3,7 @@
 
 if (isset($_GET['loggedOut'])) {
     session_start();
-    unset($_SESSION['userId']);
+    unset($_SESSION['userID']);
     session_destroy();
 }
 
