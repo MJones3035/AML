@@ -1,26 +1,30 @@
 <?php
-include_once("accountSQL.php");
+include_once("user_sql.php");
 
 session_start(); 
 
-$errorUsername = $errorPassword = $error = "";
+$error_username = $error_password = $error = "";
 
 if (isset($_POST['submit'])) {
     // security measures
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
 
-    $authResult = Authorise($username, $password);
+    $auth_result = authorise_user($username, $password);
+    $is_active = is_user_active($auth_result['user_id']);
 
 
 
-    if ($authResult['status'] == AuthoriseStates::MATCH) {
+    if ($auth_result['status'] == AuthoriseStates::MATCH and $is_active) {
         session_regenerate_id();
-        $_SESSION['userID'] = $authResult['user_id']; // Store user ID in session
-        header("Location: userIndex.php");
+        $_SESSION['user_id'] = $auth_result['user_id']; // Store user ID in session
+        header("Location: user_index.php");
         exit(); 
-    } else if ($authResult['status'] == AuthoriseStates::INVALID_PASSWORD) {
+    } else if ($auth_result['status'] == AuthoriseStates::INVALID_PASSWORD) {
         $error = "Invalid password";
+    }
+    else if (!$is_active) {
+        $error = "User not active. Please activate your account";
     } else {
         $error = "Invalid username and password";
     }
@@ -43,16 +47,16 @@ if (isset($_POST['submit'])) {
                                 placeholder="Enter a username" value=<?php if (isset($username)) {
                                                                             echo $username;
                                                                         } ?>>
-                            <span class="text-danger"><?php echo $errorUsername; ?></span>
+                            <span class="text-danger"><?php echo $error_username; ?></span>
                         </div>
                         <div class="form-group mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                            <span class="text-danger"><?php echo $errorPassword; ?></span>
+                            <span class="text-danger"><?php echo $error_password; ?></span>
 
                         </div>
                         <div class="pb-3">
-                            <p><a class="link-opacity-75" href="forgotPassword.php">Forgot password?</a></p>
+                            <p><a class="link-opacity-75" href="forgot_password.php">Forgot password?</a></p>
                         </div>
                         <!-- <div class="form-check mb-3">
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">

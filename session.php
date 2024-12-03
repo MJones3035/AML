@@ -2,9 +2,9 @@
 if (!isset($_SESSION)) {
     session_start();
 
-    if (!isset($_SESSION['userID'])) {
+    if (!isset($_SESSION['user_id'])) {
         session_destroy();
-        header('location: index.php?loggedOut=1');
+        header('location: index.php?logged_out=1');
     }
 }
 ?>

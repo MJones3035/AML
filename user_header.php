@@ -17,7 +17,7 @@ require_once("session.php");
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
 
-                <a class="navbar-brand me-3" href="userIndex.php">Advanced Media Library</a>
+                <a class="navbar-brand me-3" href="user_index.php">Advanced Media Library</a>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
@@ -27,8 +27,8 @@ require_once("session.php");
                 </div>
 
                 <div class="d-flex ms-auto">
-                    <a href="account.php" class="btn btn-outline-light me-2">Account</a>
-                    <a href="index.php?loggedOut=1" class="btn btn-primary">Logout</a>
+                    <a href="user_profile.php" class="btn btn-outline-light me-2">Profile</a>
+                    <a href="index.php?logged_out=1" class="btn btn-primary">Logout</a>
                 </div>
             </div>
         </nav>

@@ -1,9 +1,9 @@
 <?php 
 // require_once("database.php");
 
-if (isset($_GET['loggedOut'])) {
+if (isset($_GET['logged_out'])) {
     session_start();
-    unset($_SESSION['userID']);
+    unset($_SESSION['user_id']);
     session_destroy();
 }
 
@@ -34,7 +34,7 @@ if (isset($_GET['loggedOut'])) {
 
                 <div class="d-flex ms-auto">
                     <a href="login.php" class="btn btn-outline-light me-2">Login</a>
-                    <a href="signup.php" class="btn btn-primary">Signup</a>
+                    <a href="sign_up.php" class="btn btn-primary">Signup</a>
                 </div>
             </div>
         </nav>

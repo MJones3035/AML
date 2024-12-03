@@ -1,7 +1,7 @@
 <?php
-include_once 'accountSQL.php';
+include_once 'user_sql.php';
 //include_once 'session.php';
-include("userHeader.php");
+include("user_header.php");
 
 //session_start(); 
 
@@ -14,9 +14,9 @@ include("userHeader.php");
 //     $user = GetAccount($_SESSION['userID']);
 // }
 
-$user = GetAccount($_SESSION['userID']);
+$user = get_user($_SESSION['user_id']);
 
-$confirmationMessage = "";
+$confirmation_message = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $first_name = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_SPECIAL_CHARS);
     $last_name = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -37,27 +37,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (empty($errors)) {
         // Update user information in the database
-        UpdateAccount($_SESSION['userID'], $first_name, $last_name, $date_of_birth, $email, $address, $postcode, $phone_number);
+        update_user($_SESSION['user_id'], $first_name, $last_name, $date_of_birth, $email, $address, $postcode, $phone_number);
 
         // Refresh user information
-        $user = GetAccount($_SESSION['userID']);
-        $confirmationMessage = "Profile has been updated successfully.";
+        $user = get_user($_SESSION['user_id']);
+        $confirmation_message = "Profile has been updated successfully.";
     }
 }
 
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <div class="container pt-5 pb-5 d-flex justify-content-center">
         <div class="card custom-card">
             <div class="card-header">
                 <h1>Account Information</h1>
             </div>
             <div class="card-body custom-card-body">
-                <?php if (!empty($confirmationMessage)): ?>
-                    <div id="confirmationMessage" class="alert alert-success alert-dismissible fade show">
-                        <?php echo $confirmationMessage; ?>
+                <?php if (!empty($confirmation_message)): ?>
+                    <div id="confirmation_message$confirmation_message" class="alert alert-success alert-dismissible fade show">
+                        <?php echo $confirmation_message; ?>
                     </div>
                 <?php endif; ?>
                 <?php if (!empty($errors)): ?>
@@ -107,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script>
         $(document).ready(function() {
             setTimeout(function() {
-                $('#confirmationMessage').alert('close');
+                $('#confirmation_message$confirmation_message').alert('close');
             }, 5000);
         });
     </script>

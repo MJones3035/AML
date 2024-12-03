@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2024 at 02:31 AM
+-- Generation Time: Dec 02, 2024 at 10:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `aml_db`
+-- Database: `aml`
 --
 
 -- --------------------------------------------------------
@@ -33,6 +33,30 @@ CREATE TABLE `media_details` (
   `image_url` varchar(120) NOT NULL,
   `type` enum('book','magazine','film','video_game','newspaper') NOT NULL DEFAULT 'book'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_activation`
+--
+
+CREATE TABLE `user_activation` (
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `activate` tinyint(1) NOT NULL DEFAULT 0,
+  `activation_code` varchar(16) NOT NULL,
+  `activation_expiry` datetime NOT NULL,
+  `activated_at` datetime DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_activation`
+--
+
+INSERT INTO `user_activation` (`user_id`, `activate`, `activation_code`, `activation_expiry`, `activated_at`, `created_at`, `updated_at`) VALUES
+(26, 0, 'f4a89ee7f480b0f8', '2024-12-02 19:13:43', NULL, '2024-12-01 18:13:43', '2024-12-01 18:13:43'),
+(27, 0, '590a40e70d354eec', '2024-12-03 21:56:38', NULL, '2024-12-02 20:56:38', '2024-12-02 20:56:38');
 
 -- --------------------------------------------------------
 
@@ -54,7 +78,10 @@ INSERT INTO `user_credentials` (`user_id`, `username`, `password`) VALUES
 (12, 'user8', '$2y$10$EjZpc/A.g2JAqO1OK8EaLe.tT6mGu6UkSnMEMz6TW72b/2s9KPYWi'),
 (13, 'user9', '$2y$10$fdlJ1xB1ESbcVVNXKSHnfOeaJXTz0EltqOptOLckkydKst4ZX9bjy'),
 (14, 'user10', '$2y$10$nqv5jTELApWBYtKfIBmQouSIHxYoxiSQ6GVDoGzJd2ikOfU8NivJ2'),
-(15, 'user11', '$2y$10$M16g8l0k67YPBlvK7ARszOsOYQ3pHiGA61bmuS.5PKb9rnSzrb8wO');
+(15, 'user11', '$2y$10$M16g8l0k67YPBlvK7ARszOsOYQ3pHiGA61bmuS.5PKb9rnSzrb8wO'),
+(16, 'user22', '$2y$10$0MiIom9U3qRRy3i4csiRw.s7kw10xf32TpavDCAA138FX7rpQIUG2'),
+(26, 'matt', '$2y$10$jPWXtP5Mk7Eo.RwvQknOmecPFazpqYhSV1biH/S3uLDP48e0ato1S'),
+(27, 'user0', '$2y$10$i5dYnSsLq89dFb7ldXwrX.WpEIFDNJjto8C4NidmX5psP8jh67o9q');
 
 -- --------------------------------------------------------
 
@@ -64,8 +91,8 @@ INSERT INTO `user_credentials` (`user_id`, `username`, `password`) VALUES
 
 CREATE TABLE `user_details` (
   `user_id` int(10) UNSIGNED NOT NULL,
-  `first_name` varchar(30) NOT NULL,
-  `last_name` varchar(30) NOT NULL,
+  `first_name` varchar(60) NOT NULL,
+  `last_name` varchar(60) NOT NULL,
   `date_of_birth` date NOT NULL,
   `email` varchar(60) NOT NULL,
   `address` varchar(60) NOT NULL,
@@ -81,7 +108,10 @@ INSERT INTO `user_details` (`user_id`, `first_name`, `last_name`, `date_of_birth
 (12, 'bob', 'bob', '2024-11-06', 'bob@email', '011', '011', '11'),
 (13, 'bob', 'bob', '2024-11-06', 'bob@email', '011', '011', '11'),
 (14, 'bob', 'bob', '2024-11-06', 'bob@email', '011', '011', '11'),
-(15, 'aa', 'aa', '2024-11-12', 'aa@email.com', '11', '11', '11');
+(15, 'aa', 'aa', '2024-11-12', 'aa@email.com', '11', '11', '11'),
+(16, '2', '2', '2024-11-14', '2@2', '2', '2', '2'),
+(26, '1', '1', '2024-12-12', 'matthewjones3035@gmail.com', '1', '1', '1'),
+(27, '1', '1', '2024-12-22', 'matthewjones3035@gmail.com', '11', '11', '11');
 
 -- --------------------------------------------------------
 
@@ -106,7 +136,10 @@ INSERT INTO `user_privileges` (`user_id`, `is_branch_librarian`, `is_branch_mana
 (12, 0, 0, 0, 0, 0),
 (13, 0, 0, 0, 0, 0),
 (14, 0, 0, 0, 0, 0),
-(15, 0, 0, 0, 0, 0);
+(15, 0, 0, 0, 0, 0),
+(16, 0, 0, 0, 0, 0),
+(26, 0, 0, 0, 0, 0),
+(27, 0, 0, 0, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -117,6 +150,12 @@ INSERT INTO `user_privileges` (`user_id`, `is_branch_librarian`, `is_branch_mana
 --
 ALTER TABLE `media_details`
   ADD PRIMARY KEY (`media_id`);
+
+--
+-- Indexes for table `user_activation`
+--
+ALTER TABLE `user_activation`
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- Indexes for table `user_credentials`
@@ -154,11 +193,17 @@ ALTER TABLE `media_details`
 -- AUTO_INCREMENT for table `user_credentials`
 --
 ALTER TABLE `user_credentials`
-  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `user_activation`
+--
+ALTER TABLE `user_activation`
+  ADD CONSTRAINT `user_activation_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_credentials` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_details`
