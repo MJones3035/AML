@@ -4,12 +4,12 @@ include_once("database.php");
 
 enum Roles
 {
-    case USER;
-    case BRANCH_LIBRARIAN;
-    case BRANCH_MANAGER;
-    case PURCHASE_MANAGER;
-    case ACCOUNTANT;
-    case ADMIN;
+    const USER = 1;
+    const BRANCH_LIBRARIAN = 2;
+    const BRANCH_MANAGER = 3;
+    const PURCHASE_MANAGER = 4;
+    const ACCOUNTANT = 5;
+    const ADMIN = 6;
 }
 
 enum AuthoriseStates
