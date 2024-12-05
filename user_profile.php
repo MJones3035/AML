@@ -14,7 +14,11 @@ include("user_header.php");
 //     $user = GetAccount($_SESSION['userID']);
 // }
 
+//var_dump($_SESSION);
+
 $user = get_user($_SESSION['user_id']);
+
+var_dump($user);
 
 $confirmation_message = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -37,11 +41,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (empty($errors)) {
         // Update user information in the database
-        update_user($_SESSION['user_id'], $first_name, $last_name, $date_of_birth, $email, $address, $postcode, $phone_number);
 
-        // Refresh user information
-        $user = get_user($_SESSION['user_id']);
-        $confirmation_message = "Profile has been updated successfully.";
+        
+        if (update_user($_SESSION['user_id'], $first_name, $last_name, $date_of_birth, $email, $address, $postcode, $phone_number)) {
+            // Refresh user information
+            //$user = get_user($_SESSION['user_id']);
+            $confirmation_message = "Profile has been updated successfully.";
+        }
+        else {
+            $errors[] = "Profile failed to be updated.";
+        }
+
+
     }
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-include("database.php");
+include_once("database.php");
 
 enum Roles
 {
@@ -50,7 +50,7 @@ function get_user(int $user_id): array
 
     $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
-    $query = "SELECT * FROM user_details, user_credentials WHERE user_credentials.user_id = ?";
+    $query = 'SELECT * FROM user_details, user_credentials WHERE user_credentials.user_id = ?';
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
@@ -63,13 +63,13 @@ function get_user(int $user_id): array
     }
 
     // Fetch the user's information
-    $userData = $result->fetch_assoc();
+    $user_data = $result->fetch_assoc();
 
     // Close the statement and connection
     $stmt->close();
     $conn->close();
 
-    return $userData;
+    return $user_data;
 }
 
 function does_username_exist(string $username): bool
@@ -99,9 +99,9 @@ function does_username_exist(string $username): bool
     return $res;
 }
 
-function generate_random_code(int $size = 16): string
+function generate_random_code(int $size = 32): string
 {
-    return bin2hex(random_bytes($size));  // returns 32 random characters
+    return bin2hex(random_bytes($size / 2));  // returns 32 random characters
 }
 
 function create_user(array $data, Roles $role, float $expiry = 1 * 24 * 60 * 60,): bool
@@ -213,17 +213,21 @@ function create_user(array $data, Roles $role, float $expiry = 1 * 24 * 60 * 60,
     return $created;
 }
 
-function update_user(int $user_id, string $first_name, string $last_name, string $date_of_birth, string $email, string $address, string $postcode, int $phone_number): void
+function update_user(int $user_id, string $first_name, string $last_name, string $date_of_birth, string $email, string $address, string $postcode, int $phone_number): bool
 {
     $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
-    $query = "UPDATE user_details SET first_name = ?, last_name = ?, date_of_birth = ?, email = ?, address = ?, postcode = ?, phone_number = ? WHERE user_id = ?";
+    $query = 'UPDATE user_details SET first_name = ?, last_name = ?, date_of_birth = ?, email = ?, address = ?, postcode = ?, phone_number = ? WHERE user_id = ?';
     $stmt = $conn->prepare($query);
     $stmt->bind_param("sssssssi", $first_name, $last_name, $date_of_birth, $email, $address, $postcode, $phone_number, $user_id);
     $stmt->execute();
 
+    $updated = $stmt->affected_rows > 0; // returns if any rows were updated
+
     $stmt->close();
     $conn->close();
+
+    return $updated;
 }
 
 function activate_user(int $user_id): bool
