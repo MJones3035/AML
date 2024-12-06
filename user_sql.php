@@ -50,9 +50,9 @@ function get_user(int $user_id): array
 
     $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
-    $query = 'SELECT * FROM user_details, user_credentials WHERE user_credentials.user_id = ?';
+    $query = 'SELECT * FROM user_details, user_credentials WHERE user_credentials.user_id = ? and user_details.user_id = ?';
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $user_id);
+    $stmt->bind_param("ii", $user_id, $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -104,7 +104,7 @@ function generate_random_code(int $size = 32): string
     return bin2hex(random_bytes($size / 2));  // returns 32 random characters
 }
 
-function create_user(array $data, Roles $role, float $expiry = 1 * 24 * 60 * 60,): bool
+function create_user(array $data, int $role, float $expiry = 1 * 24 * 60 * 60,): bool
 {
     // credentials
     $created = true;
@@ -157,8 +157,6 @@ function create_user(array $data, Roles $role, float $expiry = 1 * 24 * 60 * 60,
 
     $stmt = $conn->prepare($sql);
 
-    $password_hash = password_hash($data['password'], PASSWORD_BCRYPT);
-
     $stmt->bind_param(
         'issssssi',
         $last_id,
@@ -182,8 +180,6 @@ function create_user(array $data, Roles $role, float $expiry = 1 * 24 * 60 * 60,
     $sql = 'INSERT INTO user_privileges(user_id, is_branch_librarian, is_branch_manager, is_purchase_manager, is_accountant, is_admin) VALUES (?, ?, ?, ?, ?, ?)';
 
     $stmt = $conn->prepare($sql);
-
-    $password_hash = password_hash($data['password'], PASSWORD_BCRYPT);
 
     $is_branch_librarian =  ($role == Roles::BRANCH_LIBRARIAN) ? 1 : 0;
     $is_branch_manager = ($role == Roles::BRANCH_MANAGER) ? 1 : 0;
@@ -213,13 +209,35 @@ function create_user(array $data, Roles $role, float $expiry = 1 * 24 * 60 * 60,
     return $created;
 }
 
-function update_user(int $user_id, string $first_name, string $last_name, string $date_of_birth, string $email, string $address, string $postcode, int $phone_number): bool
+function update_user_profile(int $user_id, string $username, string $first_name, string $last_name, string $date_of_birth, string $email, string $address, string $postcode, int $phone_number): bool
 {
+
     $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
-    $query = 'UPDATE user_details SET first_name = ?, last_name = ?, date_of_birth = ?, email = ?, address = ?, postcode = ?, phone_number = ? WHERE user_id = ?';
+    $query = 'UPDATE user_credentials as uc, user_details as ud SET uc.username = ?, ud.first_name = ?, ud.last_name = ?, ud.date_of_birth = ?, ud.email = ?, ud.address = ?,
+     ud.postcode = ?, ud.phone_number = ? WHERE uc.user_id = ? AND ud.user_id = ?';
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("sssssssi", $first_name, $last_name, $date_of_birth, $email, $address, $postcode, $phone_number, $user_id);
+    $stmt->bind_param("sssssssiii", $username, $first_name, $last_name, $date_of_birth, $email, $address, $postcode, $phone_number, $user_id, $user_id);
+    $stmt->execute();
+
+    $updated = $stmt->affected_rows > 0; // returns if any rows were updated
+
+    $stmt->close();
+    $conn->close();
+
+    return $updated;
+}
+
+function update_user_password(int $user_id, string $password): bool
+{
+
+    $password_hash = password_hash($password, PASSWORD_BCRYPT);
+
+    $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+
+    $query = 'UPDATE user_credentials SET password = ? WHERE user_id = ?';
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("si", $password_hash, $user_id);
     $stmt->execute();
 
     $updated = $stmt->affected_rows > 0; // returns if any rows were updated
