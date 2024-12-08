@@ -11,21 +11,28 @@ if (isset($_POST['submit'])) {
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
 
     $auth_result = authorise_user($username, $password);
-    $is_active = is_user_active($auth_result['user_id']);
+    $is_active = false;
 
+    if (isset($auth_result['user_id'])) {
+        $is_active = is_user_active($auth_result['user_id']);
+    }
 
+    if ($auth_result['status'] == AuthoriseStates::MATCH) {
 
-    if ($auth_result['status'] == AuthoriseStates::MATCH and $is_active) {
-        session_regenerate_id();
-        $_SESSION['user_id'] = $auth_result['user_id']; // Store user ID in session
-        header("Location: user_index.php");
-        exit(); 
+        if (!$is_active) {
+            $error = "User not active. Please activate your account";
+        }
+        else {
+            session_regenerate_id();
+            $_SESSION['user_id'] = $auth_result['user_id']; // Store user ID in session
+            header("Location: user_index.php");
+            exit(); 
+        }
+
     } else if ($auth_result['status'] == AuthoriseStates::INVALID_PASSWORD) {
         $error = "Invalid password";
     }
-    else if (!$is_active) {
-        $error = "User not active. Please activate your account";
-    } else {
+    else {
         $error = "Invalid username and password";
     }
 }
