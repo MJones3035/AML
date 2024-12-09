@@ -77,6 +77,29 @@ MESSAGE;
 
 }
 
+function send_password_reset_email(string $email, string $reset_code): string {
+    
+
+    $help_email_address = SENDER_EMAIL_ADDRESS;
+    $help_phone_number = '+44 7847246990';
+
+    $subject = 'Password Rest';
+
+    $reset_link = APP_URL . "/reset_password.php?email=$email&reset_code=$reset_code";
+
+    $message = <<<MESSAGE
+Hello,
+
+Click on this link to reset your password $reset_link. If this was not you, please contact $help_phone_number or $help_email_address.
+MESSAGE;
+
+    $res = send_email($email, $subject, $message);
+
+    return $res;
+    
+
+}
+
 function send_email(string $email, string $subject, string $message): string {
     $mail = new PHPMailer(true);
 
