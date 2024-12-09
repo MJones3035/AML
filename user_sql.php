@@ -72,6 +72,45 @@ function get_user(int $user_id): array
     return $user_data;
 }
 
+function get_user_id_by_username(string $username): array
+{
+
+    $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+
+    $query = 'SELECT user_id FROM user_credentials WHERE user_credentials.username=?';
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Fetch the user's information
+    $user_data = $result->fetch_assoc();
+
+    // Close the statement and connection
+    $stmt->close();
+    $conn->close();
+
+    return $user_data;
+}
+
+function delete_user(int $user_id): bool {
+
+    $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+
+    $query = 'Delete FROM user_credentials WHERE user_id = ?';
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+
+    $deleted = $stmt->affected_rows > 0; // returns if any rows were deleted
+
+    $stmt->close();
+    $conn->close();
+
+    return $deleted;
+
+}
+
 function does_username_exist(string $username): bool
 {
 
