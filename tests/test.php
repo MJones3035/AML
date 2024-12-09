@@ -9,7 +9,9 @@ class Test extends \PHPUnit\Framework\TestCase {
     //     $this->assertSame($a, $b);
     // }
 
-    // merthod has to start with the word test or it won't be reconised
+    // use this in terminal to test php vendor/bin/phpunit tests/test.php
+
+    // method has to start with the word test or it won't be reconised
     public function test_user_login() {
         require 'user_sql.php';
 
