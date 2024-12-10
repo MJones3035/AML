@@ -401,33 +401,38 @@ function is_branch_manager(int $user_id): bool
     $row = $result->fetch_assoc();
     return $row['is_branch_manager'] == 1;
 }
-function add_media($title, $author, $year, $genre, $type, $branch_id)
-{
-    $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-    $sql = 'INSERT INTO media(title, author, year, genre, type, branch_id) VALUES (?, ?, ?, ?, ?, ?)';
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ssisii', $title, $author, $year, $genre, $type, $branch_id);
-    $stmt->execute();
-    $stmt->close();
-    $conn->close();
-}
-function update_media($media_id, $title, $author, $year, $genre, $type, $branch_id)
-{
-    $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-    $sql = 'UPDATE media SET title=?, author=?, year=?, genre=?, type=?, branch_id=? WHERE media_id=?';
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ssisiii', $title, $author, $year, $genre, $type, $branch_id, $media_id);
-    $stmt->execute();
-    $stmt->close();
-    $conn->close();
-}
-function delete_media($media_id)
-{
-    $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-    $sql = 'DELETE FROM media WHERE media_id=?';
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $media_id);
-    $stmt->execute();
-    $stmt->close();
-    $conn->close();
-}
+
+
+//COMMENTED OUT FOR NOW
+
+
+// function add_media($title, $author, $year, $genre, $type, $branch_id)
+// {
+//     $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+//     $sql = 'INSERT INTO media(title, author, year, genre, type, branch_id) VALUES (?, ?, ?, ?, ?, ?)';
+//     $stmt = $conn->prepare($sql);
+//     $stmt->bind_param('ssisii', $title, $author, $year, $genre, $type, $branch_id);
+//     $stmt->execute();
+//     $stmt->close();
+//     $conn->close();
+// }
+// function update_media($media_id, $title, $author, $year, $genre, $type, $branch_id)
+// {
+//     $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+//     $sql = 'UPDATE media SET title=?, author=?, year=?, genre=?, type=?, branch_id=? WHERE media_id=?';
+//     $stmt = $conn->prepare($sql);
+//     $stmt->bind_param('ssisiii', $title, $author, $year, $genre, $type, $branch_id, $media_id);
+//     $stmt->execute();
+//     $stmt->close();
+//     $conn->close();
+// }
+// function delete_media($media_id)
+// {
+//     $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+//     $sql = 'DELETE FROM media WHERE media_id=?';
+//     $stmt = $conn->prepare($sql);
+//     $stmt->bind_param('i', $media_id);
+//     $stmt->execute();
+//     $stmt->close();
+//     $conn->close();
+// }
