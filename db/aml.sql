@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2024 at 03:43 AM
+-- Generation Time: Dec 09, 2024 at 03:16 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -78,7 +78,7 @@ CREATE TABLE `user_credentials` (
 INSERT INTO `user_credentials` (`user_id`, `username`, `password`) VALUES
 (28, 'test', '$2y$10$Rjp8/ukXAZiccw0alAO5cO903f7RkJ7Tz1P/ydFNOJSwFo89wJmg2'),
 (29, 'test2', '$2y$10$KauPKWtTKtCWT8LY.1qFoe3Nt.xsCGe/vsXyRc9OXscb7RHUSnXLO'),
-(30, 'test3', '$2y$10$bk1LFHxpKOhkGDCAYNO53eIFQmbuINcq6gFNMdb6.lOpS1Oxx89Sq');
+(30, 'test3', '$2y$10$iqDmR07EKyKpgMcou55uXeePzI.sDFIBraGzcYrIrucWKhIg6Inki');
 
 -- --------------------------------------------------------
 
@@ -182,7 +182,7 @@ ALTER TABLE `media_details`
 -- AUTO_INCREMENT for table `user_credentials`
 --
 ALTER TABLE `user_credentials`
-  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Constraints for dumped tables
