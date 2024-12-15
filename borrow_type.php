@@ -1,5 +1,4 @@
 <?php
-require_once("session.php");
 include("database.php");
 if(isset($_GET['id'])&& isset($_GET['borrow_type']))
 {

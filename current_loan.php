@@ -1,5 +1,4 @@
 <?php
-require_once("session.php");
 include("database.php");
 $query = "SELECT media.cover_img, media.title, media.author, media.published_year, borrow.borrowed_date, borrow.due_date, media.media_id, media.favourite FROM borrow INNER JOIN media ON borrow.media_id = media.media_id order by borrow.borrowed_date DESC; ";
 $result = mysqli_query($db_conn, $query);
@@ -14,6 +13,9 @@ $result = mysqli_query($db_conn, $query);
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Advanced Media Library</title>
+    <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
 	
@@ -23,7 +25,7 @@ $result = mysqli_query($db_conn, $query);
 
 		<div>
 			<ul id="nav">
-				<li><a href="user_index.php" >Home</a></li>
+				<li><a href="media_index.php" >Home</a></li>
 				<li><a href="current_loan.php" class="active">Current Loans</a></li>
                 <li><a href="admin/index.php">Reservation</a></li>
                 <li><a href="favourite.php">Favourite</a></li>
@@ -100,8 +102,6 @@ $result = mysqli_query($db_conn, $query);
             </tbody>
 
         </table>
-
-        <?php include("footer.php"); ?>
 
 </body>
 </html>
