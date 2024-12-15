@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+    <?php
+    //include 'header.php';
+    $myRoot = $_SERVER["DOCUMENT_ROOT"];
+    // echo $myRoot
+    include($myRoot . '/header.php');
 
-
-
-<body>
-
-    <?php include("header.php"); ?>
-
+    ?>
+    
     <main>
-
         <div id="carouselExampleCaptions" class="carousel slide justify-centre">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>

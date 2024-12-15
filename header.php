@@ -1,11 +1,12 @@
 <?php 
-// require_once("database.php");
+    require_once("database.php");
 
+/*
 if (isset($_GET['logged_out'])) {
     session_start();
     unset($_SESSION['user_id']);
     session_destroy();
-}
+}*/
 
 ?>
 
@@ -29,6 +30,8 @@ if (isset($_GET['logged_out'])) {
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" href="catalogue.php">Catalogue</a>
+                            <a class="nav-link" href="add_media.php">Upload Media</a>
+                            <a class="nav-link" href="delete_media.php">Delete Media</a>
                     </ul>
                 </div>
 
@@ -39,4 +42,3 @@ if (isset($_GET['logged_out'])) {
             </div>
         </nav>
     </header>
-
