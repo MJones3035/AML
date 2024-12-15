@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2024 at 03:16 PM
+-- Generation Time: Dec 15, 2024 at 06:17 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,15 +24,93 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `media_details`
+-- Table structure for table `borrow`
 --
 
-CREATE TABLE `media_details` (
-  `media_id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(60) NOT NULL,
-  `image_url` varchar(120) NOT NULL,
-  `type` enum('book','magazine','film','video_game','newspaper') NOT NULL DEFAULT 'book'
+CREATE TABLE `borrow` (
+  `borrow_id` int(10) NOT NULL,
+  `media_id` int(10) NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `borrowed_date` date NOT NULL,
+  `due_date` date NOT NULL,
+  `borrow_type` enum('delivery','library_pickup') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `borrow`
+--
+
+INSERT INTO `borrow` (`borrow_id`, `media_id`, `user_id`, `borrowed_date`, `due_date`, `borrow_type`) VALUES
+(1, 7, 28, '2024-12-12', '2024-12-26', 'library_pickup'),
+(2, 6, 28, '2024-12-12', '2024-12-26', NULL),
+(3, 12, 28, '2024-12-12', '2024-12-26', NULL),
+(4, 9, 28, '2024-12-12', '2024-12-26', NULL),
+(5, 9, 28, '2024-12-12', '2024-12-26', NULL),
+(6, 9, 28, '2024-12-12', '2024-12-26', NULL),
+(7, 9, 28, '2024-12-12', '2024-12-26', NULL),
+(8, 9, 28, '2024-12-12', '2024-12-26', NULL),
+(9, 9, 28, '2024-12-12', '2024-12-26', NULL),
+(10, 9, 28, '2024-12-12', '2024-12-26', NULL),
+(11, 9, 28, '2024-12-12', '2024-12-26', NULL),
+(12, 9, 28, '2024-12-12', '2024-12-26', NULL),
+(13, 9, 28, '2024-12-12', '2024-12-26', NULL),
+(14, 9, 28, '2024-12-12', '2024-12-26', NULL),
+(15, 9, 28, '2024-12-12', '2024-12-26', NULL),
+(16, 9, 28, '2024-12-12', '2024-12-26', NULL),
+(17, 7, 28, '2024-12-12', '2024-12-26', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `media`
+--
+
+CREATE TABLE `media` (
+  `media_id` int(10) NOT NULL,
+  `cover_img` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `published_year` year(4) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `author` varchar(255) NOT NULL,
+  `stock` int(10) NOT NULL,
+  `media_type_id` int(11) NOT NULL,
+  `favourite` enum('fav','unfav') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `media`
+--
+
+INSERT INTO `media` (`media_id`, `cover_img`, `title`, `published_year`, `description`, `author`, `stock`, `media_type_id`, `favourite`) VALUES
+(6, 'Congo.jpg', 'congo', '2007', 'iwj0fieifbejfro0ekfoewf0eowsfoejfeirferf', 'james', 3, 1, 'unfav'),
+(7, 'emma.jpg', 'Emma', '2010', 'edovpesjfjoejfopef', 'Luke', 2, 1, 'fav'),
+(8, 'Gone girl.jpg', 'gone girl', '2014', 'sfojwofjwsof', 'Marinar', 1, 2, 'fav'),
+(9, 'The road.jpg', 'Road', '2021', 'iwojdfoikfisdjfosdifs', 'Luost', 5, 3, 'unfav'),
+(10, 'emma.jpg', 'Luke', '2010', 'oif0wihf0iwsjf09w', 'Loust', 4, 3, 'fav'),
+(11, 'The Notebook.jpg', 'NOte', '2022', 'sdjfwjfwosfos', 'U than win', 1, 4, 'fav'),
+(12, 'Twilight.jpg', 'Twin', '2014', 'sdjfpwsjfowsfo-w', 'Yoon Ya ti', 4, 5, 'fav');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `media_type`
+--
+
+CREATE TABLE `media_type` (
+  `media_type_id` int(11) NOT NULL,
+  `media_type` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `media_type`
+--
+
+INSERT INTO `media_type` (`media_type_id`, `media_type`) VALUES
+(1, 'Book'),
+(2, 'Magazine'),
+(3, 'Journal'),
+(4, 'CD/DVD'),
+(5, 'Audio');
 
 -- --------------------------------------------------------
 
@@ -78,7 +156,7 @@ CREATE TABLE `user_credentials` (
 INSERT INTO `user_credentials` (`user_id`, `username`, `password`) VALUES
 (28, 'test', '$2y$10$Rjp8/ukXAZiccw0alAO5cO903f7RkJ7Tz1P/ydFNOJSwFo89wJmg2'),
 (29, 'test2', '$2y$10$KauPKWtTKtCWT8LY.1qFoe3Nt.xsCGe/vsXyRc9OXscb7RHUSnXLO'),
-(30, 'test3', '$2y$10$iqDmR07EKyKpgMcou55uXeePzI.sDFIBraGzcYrIrucWKhIg6Inki');
+(30, 'test3', '$2y$10$bk1LFHxpKOhkGDCAYNO53eIFQmbuINcq6gFNMdb6.lOpS1Oxx89Sq');
 
 -- --------------------------------------------------------
 
@@ -135,10 +213,25 @@ INSERT INTO `user_privileges` (`user_id`, `is_branch_librarian`, `is_branch_mana
 --
 
 --
--- Indexes for table `media_details`
+-- Indexes for table `borrow`
 --
-ALTER TABLE `media_details`
-  ADD PRIMARY KEY (`media_id`);
+ALTER TABLE `borrow`
+  ADD PRIMARY KEY (`borrow_id`),
+  ADD KEY `borrow_fk` (`media_id`),
+  ADD KEY `user_fk` (`user_id`);
+
+--
+-- Indexes for table `media`
+--
+ALTER TABLE `media`
+  ADD PRIMARY KEY (`media_id`),
+  ADD KEY `media_type_fk` (`media_type_id`);
+
+--
+-- Indexes for table `media_type`
+--
+ALTER TABLE `media_type`
+  ADD PRIMARY KEY (`media_type_id`);
 
 --
 -- Indexes for table `user_activation`
@@ -173,20 +266,45 @@ ALTER TABLE `user_privileges`
 --
 
 --
--- AUTO_INCREMENT for table `media_details`
+-- AUTO_INCREMENT for table `borrow`
 --
-ALTER TABLE `media_details`
-  MODIFY `media_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `borrow`
+  MODIFY `borrow_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `media`
+--
+ALTER TABLE `media`
+  MODIFY `media_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `media_type`
+--
+ALTER TABLE `media_type`
+  MODIFY `media_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user_credentials`
 --
 ALTER TABLE `user_credentials`
-  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `borrow`
+--
+ALTER TABLE `borrow`
+  ADD CONSTRAINT `borrow_fk` FOREIGN KEY (`media_id`) REFERENCES `media` (`media_id`),
+  ADD CONSTRAINT `user_fk` FOREIGN KEY (`user_id`) REFERENCES `user_details` (`user_id`);
+
+--
+-- Constraints for table `media`
+--
+ALTER TABLE `media`
+  ADD CONSTRAINT `media_type_fk` FOREIGN KEY (`media_type_id`) REFERENCES `media_type` (`media_type_id`);
 
 --
 -- Constraints for table `user_activation`
