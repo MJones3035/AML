@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+
+// $media_dir = "media.php";
+
+// if (isset(($_POST['query']))){
+//     $media_dir = $media_dir . "?search_query=" . $_POST['search'];
+// }
+
+?>
+
 
 
 <body>
@@ -9,6 +19,13 @@
 
     <main>
 
+        <div>
+            <form action="media.php" method="POST">
+                <input type="search" name="query" placeholder="Search Media....">
+                <button type="submit" name="search"><p class="fa fa-search">Search</p></button>
+            </form>
+        </div>
+
         <div id="carouselExampleCaptions" class="carousel slide justify-centre">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -16,6 +33,8 @@
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner">
+
+
                 <div class="carousel-item active">
                     <img src="images/old-books.jpg" class="d-block w-100" alt="old books">
                     <div class="carousel-caption d-none d-md-block">

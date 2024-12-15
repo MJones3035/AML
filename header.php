@@ -28,7 +28,7 @@ if (isset($_GET['logged_out'])) {
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="catalogue.php">Catalogue</a>
+                            <a class="nav-link" href="media.php">Media</a>
                     </ul>
                 </div>
 
