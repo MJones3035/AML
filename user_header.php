@@ -24,8 +24,6 @@ require_once("session.php");
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" href="catalogue.php">Catalogue</a>
-                            <a class="nav-link" href="add_media.php">Upload Media</a>
-                            <a class="nav-link" href="delete_media.php">Delete Media</a>
                     </ul>
                 </div>
           -->

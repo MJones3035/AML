@@ -1,13 +1,19 @@
+<<<<<<< HEAD
 <?php
     require_once("database.php");
 
 
 /*
+=======
+<?php 
+// require_once("database.php");
+
+>>>>>>> parent of 7561156 (added functionality to upload/ delete media)
 if (isset($_GET['logged_out'])) {
     session_start();
     unset($_SESSION['user_id']);
     session_destroy();
-}*/
+}
 
 ?>
 
@@ -32,8 +38,6 @@ if (isset($_GET['logged_out'])) {
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" href="catalogue.php">Catalogue</a>
-                            <a class="nav-link" href="add_media.php">Upload Media</a>
-                            <a class="nav-link" href="delete_media.php">Delete Media</a>
                     </ul>
                 </div>
 
@@ -45,6 +49,7 @@ if (isset($_GET['logged_out'])) {
         </nav>
     </header>
 
+<<<<<<< HEAD
 <!--
 <header>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -68,3 +73,5 @@ if (isset($_GET['logged_out'])) {
 </nav>
 </header>
 -->
+=======
+>>>>>>> parent of 7561156 (added functionality to upload/ delete media)
