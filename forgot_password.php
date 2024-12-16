@@ -32,9 +32,30 @@ if (isset($_POST['submit'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-<body class="d-flex flex-column min-vh-100">
-    <?php include("header.php"); ?>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Advanced Media Library</title>	
+</head>
+<body>
+	
+	<section id="header">
+		<img src="images/logo.png" width="60px" height="50px">
+
+		<div>
+			<ul id="nav">
+				<li><a href="index.php">Home</a></li>
+				<li><a href="login.php" class="active">Login</a></li>
+                <li><a href="sign_up.php">Register</a></li>
+			</ul>
+		</div>
+	</section>
+
+	<section id="page-header">
+		<h2>Advanced Media Library</h2>
+		<p>Have a precious time with famous books</p>
+	</section>
     <main class="container pt-5 pb-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
