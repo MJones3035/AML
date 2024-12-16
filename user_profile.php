@@ -106,42 +106,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Advanced Media Library</title>	
-</head>
+
+<?php include("user_header.php") ?>
+
 <body>
-
-	
-	<!-- header & navigation -->
-	<section id="header">
-		<img src="images/logo.png" width="60px" height="50px">
-
-		<div>
-			<ul id="nav">
-				<li><a href="user_index.php">Home</a></li>
-				<li><a href="current_loan.php">Current Loans</a></li>
-                <li><a href="admin/index.php">Reservation</a></li>
-                <li><a href="favourite.php">Favourite</a></li>
-                <li><a href="user_profile.php" class="active"><i class="fa-solid fa-circle-user fs-2"></i></a></li>
-                <li><a href="index.php?logged_out=1"><i class="fa-solid fa-right-from-bracket fs-2"></i></a></li>
-			</ul>
-		</div>
-	</section>
-	<!-- -->
-		
-	<!-- intro section -->
-	<section id="page-header">
-		<h2>Advanced Library</h2>
-		<p>Have a precious time with famous books</p>
-	</section>
 
 <div class="d-flex flex-column min-vh-100">
     <div class="container pt-5 pb-5 d-flex justify-content-center">
         <div class="card custom-card">
             <div class="card-header">
-                <h1>Account Information</h1>
+                <h1>Profile Information</h1>
             </div>
             <div class="card-body custom-card-body">
                 <?php if (!empty($confirmation_message)): ?>
