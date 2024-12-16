@@ -19,6 +19,16 @@ require_once("session.php");
 
             <img src="images/logo.png" width="60px" height="50px" class="me-3">
 
+           <!-- residual merge conflict, for reference
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="catalogue.php">Catalogue</a>
+                            <a class="nav-link" href="add_media.php">Upload Media</a>
+                            <a class="nav-link" href="delete_media.php">Delete Media</a>
+                    </ul>
+                </div>
+          -->
             <h2 class="nv-title mb-0">Advanced Media Library</h2>
 
             <div class="ms-auto">
