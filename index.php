@@ -26,9 +26,19 @@
 
     <?php include("header.php"); ?>
 
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<body>
+
+    <?php include("header.php"); ?>
+
     <main>
 
 >>>>>>> parent of 7561156 (added functionality to upload/ delete media)
+
         <div id="carouselExampleCaptions" class="carousel slide justify-centre">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>

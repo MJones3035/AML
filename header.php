@@ -14,6 +14,7 @@ if (isset($_GET['logged_out'])) {
     unset($_SESSION['user_id']);
     session_destroy();
 }
+}
 
 ?>
 
