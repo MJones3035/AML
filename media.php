@@ -37,7 +37,6 @@
 
 <section id="page-header">
     <h2>Advanced Library</h2>
-    <p>Have a precious time with famous books</p>
 
 
     <form action="media.php" method="POST">
@@ -73,7 +72,7 @@
                         <i>by <?php echo $row['author']; ?></i><br>
                         <h4><?php echo $row['published_year']; ?> </h4>
                     </div>
-                    <a href="detail.php?id=<?php echo $row['media_id']?>" id="detail">Detail</a>
+                    <a href="media_details.php?id=<?php echo $row['media_id']?>" id="detail">Detail</a>
 
                 </div>
             <?php endwhile; ?>

@@ -81,7 +81,7 @@ use PhpParser\Node\Expr\Include_;
                         <?php endif;?>
                     </div>
 
-                    <a href="user_detail.php?id=<?php echo $row['media_id']?>" id="detail">Detail</a>
+                    <a href="user_media_details.php?id=<?php echo $row['media_id']?>" id="detail">Detail</a>
 
                 </div>
             <?php endwhile; ?>

@@ -1,30 +1,14 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Advanced Media Library</title>
+
+<?php include("header.php"); ?>
+
     
 <body>
 
-	<!-- header & navigation -->
-	<section id="header">
-		<img src="images/logo.png" width="60px" height="50px">
 
-		<div>
-			<ul id="nav">
-				<li><a href="index.php" class="active">Home</a></li>
-				<li><a href="login.php">Login</a></li>
-                <li><a href="sign_up.php">Register</a></li>
-			</ul>
-		</div>
-	</section>
-	<!-- -->
-
-	<!-- -->
 	<section id="page-header">
-		<h2>Detail</h2>
-		<p>Have a precious time with famous books</p>
+		<h2>Media Details</h2>
         <form action="media.php" method="POST">
         	<input type="search" name="query" placeholder="Search Media...." required>
 			<button type="submit" name="search"><i class="fa fa-search"></i></button>
@@ -32,7 +16,6 @@
 	</section>
 
 
-	<!-- -->
 	<?php
 		include("database.php");
 		$id=$_GET['id'];
@@ -63,7 +46,7 @@
 		</div>
 	</section>
 
-	<!-- -->
+
 	<?php include("footer.php"); ?>
 
 </body>

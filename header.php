@@ -21,19 +21,19 @@ if (isset($_GET['logged_out'])) {
     <link rel="stylesheet" href="style.css">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid p-lg-2 px-lg-5 d-flex align-items-center justify-content-start">
-        
-        <img src="images/logo.png" width="60px" height="50px" class="me-3">
+        <div class="container-fluid p-lg-2 px-lg-5 d-flex align-items-center justify-content-start">
 
-        <h2 class="nv-title mb-0">Advanced Media Library</h2>
+            <img src="images/logo.png" width="60px" height="50px" class="me-3">
 
-        <div class="ms-auto">
-            <ul id="nav" class="navbar-nav flex-row">
-                <li class="nav-item"><a href="index.php" class="nav-link active">Home</a></li>
-                <li class="nav-item"><a href="login.php" class="nav-link">Login</a></li>
-                <li class="nav-item"><a href="sign_up.php" class="nav-link">Sign Up</a></li>
-            </ul>
+            <h2 class="nv-title mb-0">Advanced Media Library</h2>
+
+            <div class="ms-auto">
+                <ul id="nav" class="navbar-nav flex-row">
+                    <li class="nav-item"><a href="index.php" class="nav-link active">Home</a></li>
+                    <li class="nav-item"><a href="login.php" class="nav-link">Login</a></li>
+                    <li class="nav-item"><a href="sign_up.php" class="nav-link">Sign Up</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 </header>
