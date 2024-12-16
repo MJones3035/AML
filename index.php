@@ -3,10 +3,18 @@
     $myRoot = $_SERVER["DOCUMENT_ROOT"];
     // echo $myRoot
     include($myRoot . '/header.php');
+           
+           if (isset($_GET['logged_out'])) {
+	  session_start();
+	  unset($_SESSION['user_id']);
+	  session_destroy();
+}
 
     ?>
-    
-    <main>
+    <html>
+    <!-- old main index:
+      <main>
+ 
         <div id="carouselExampleCaptions" class="carousel slide justify-centre">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -45,11 +53,19 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
+-->
+<body>
 
-    </main>
+	<div class="d-flex pb-5">
+		<section id="page-header">
+			<h2>Advanced Media Library</h2>
+			<form action="media.php" method="POST">
+				<input type="search" name="query" placeholder="Search Media...." required>
+				<button type="submit" name="search"><i class="fa fa-search"></i></button>
+			</form>
 
-    <?php include("footer.php") ?>
+		</section>
+	</div>
+  </html>
 
-</body>
-
-</html>
+	<?php include("footer.php"); ?>

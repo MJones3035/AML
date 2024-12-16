@@ -1,8 +1,7 @@
 <?php
 include_once 'user_sql.php';
 include_once 'email_sql.php';
-//include_once 'session.php';
-include("user_header.php");
+include_once 'session.php';
 
 //session_start(); 
 
@@ -104,14 +103,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
 
-<body class="d-flex flex-column min-vh-100">
+<!DOCTYPE html>
+<html>
+
+<?php include("user_header.php") ?>
+
+<body>
+
+<div class="d-flex flex-column min-vh-100">
     <div class="container pt-5 pb-5 d-flex justify-content-center">
         <div class="card custom-card">
             <div class="card-header">
-                <h1>Account Information</h1>
+                <h1>Profile Information</h1>
             </div>
             <div class="card-body custom-card-body">
                 <?php if (!empty($confirmation_message)): ?>
@@ -184,6 +188,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </script>
 
     <?php include("footer.php"); ?>
+    </div>
 </body>
 
 </html>

@@ -3,7 +3,7 @@ include_once("user_sql.php");
 include_once("email_sql.php");
 
 $error_message = $error_username = $error_first_name = $error_last_name = $error_date_of_birth = $error_email = $error_address
- = $error_postcode = $error_phone = $error_password = $error_confirm_password = "";
+    = $error_postcode = $error_phone = $error_password = $error_confirm_password = "";
 
 $all_fields = TRUE;
 
@@ -135,14 +135,12 @@ if (isset($_POST['submit'])) {
         if (!does_username_exist($username)) {
             // creates user account
             $createUser = create_user($data, Roles::USER);
-                
+
             if ($createUser) {
                 send_activation_email($email, $activation_code);
             }
 
             header('Location: index.php?created_account=' . $createUser);
-            
-
         } else {
             $error_username = "Username already exists";
         }
@@ -152,11 +150,11 @@ if (isset($_POST['submit'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
-<body class="d-flex flex-column min-vh-100">
+<?php include("header.php") ?>
 
-    <?php include("header.php"); ?>
+<body>
 
     <main class="container pt-5 pb-5">
         <div class="row justify-content-center">
@@ -232,7 +230,7 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="form-group mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" maxlength="255" placeholder="Password">
+                            <input type="password" class="form-control" id="password" name="password" maxlength="255" placeholder="Enter a password greater than 9 characters">
                             <span class="text-danger"><?php echo $error_password; ?></span>
                         </div>
                         <div class="form-group mb-3 pb-3">
@@ -241,10 +239,6 @@ if (isset($_POST['submit'])) {
                                 placeholder="Confirm password">
                             <span class="text-danger"><?php echo $error_confirm_password; ?></span>
                         </div>
-                        <!-- <div class="form-check mb-3">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Remember me</label>
-                        </div> -->
                         <div>
                             <button type="submit" class="btn btn-primary w-100" name="submit" value="true">Sign Up</button>
                             <span class="text-danger"><?php echo $error_message; ?></span>

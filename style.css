@@ -27,7 +27,6 @@
 /* navigation */
 #header{
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
 	padding: 20px 80px;
@@ -41,7 +40,8 @@
 
 #nav{
 	display: flex;
-	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 }
 
 #nav li{
@@ -72,7 +72,7 @@
 	background-color: green;
 	position: absolute;
 	bottom: -4px;
-	left: 20px;
+	left: 20px
 }
 
 /*footer*/
@@ -95,14 +95,15 @@
 	justify-content: center;
 	text-align: center;
 	flex-direction: column;
+	position: sticky;
+    top: 80px;
+    z-index: 999;
 
 }
 
 #page-header h2, #page-header p{
 	color: black;
 	font-family: 'courier new', sans-serif;
-	
-
 } 
 #page-header h2{
 	font-size: 50px;
@@ -132,7 +133,6 @@
 #page-header .cats li a:hover{
 	color: grey;
 }
-
 #page-header input{
     margin-top: 10px;
     width: 400px;
@@ -285,3 +285,175 @@
     width: 90%;
     text-align: center;
 }
+
+
+.borrow_type{
+	text-align: center;
+	margin-top: 20px;
+}
+
+.borrow_type a{
+	font-size: 25px;
+	font-weight: 600;
+	color: black;
+}
+
+.borrow_type a:hover{
+	text-align: left;
+	color: green;
+}
+
+#page-header input{
+    margin-top: 10px;
+    width: 400px;
+    height: 30px;
+    font-size: 16px;
+    padding: 15px 10px;
+    border: black;
+}
+
+#page-header button{
+    height: 30px;
+    width: 30px;
+}
+
+
+#books{
+	text-align: center;
+}
+#books .book-container{
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+	flex-wrap: wrap;
+}
+
+#books .book{
+	width: 23%;
+	min-width: 250px;
+	padding: 10px 12px 0px 12px;
+	border: 1px solid #e9ebe8;
+	border-radius: 25px;
+	cursor: pointer;
+	box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
+	margin: 15px 8px;
+	transition: 0.2s ease;
+	position: relative;
+}
+
+#books .book:hover{
+	box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.06);
+}
+
+#books .book img{
+	width: 100%;
+	border-radius: 20px;
+}
+
+#books .book .des{
+	text-align: start;
+	margin-top: 15px;
+	
+}
+
+#books .book .des h5{
+	padding-top: 7px;
+	font-size: 18px;
+}
+
+#books .book .des i{
+	font-size: 12px;
+	color: grey;
+}
+
+#books .book .des h4{
+	font-size: 15px;
+	font-weight: 700;
+}
+
+#books .book .fav a{
+    font-size: 30px;
+}
+
+/* residual merge conflict, for reference
+#books .book .fav{
+    text-align: left;
+    margin-left: 20px;
+}
+
+.book #detail{
+	text-decoration: none;
+	color: black;
+	position: relative;
+	top: -36px;
+	left: 90px;
+}
+
+.book #detail:hover{
+	color: grey;
+}
+
+
+.section-p1 #detail-container{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+		
+}
+	
+ #dimg img{
+	width: 400px;
+	height: 400px;
+	box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.5);
+	display: flex;
+	flex: 1;
+}	
+
+ #detail-content{
+	display: flex;
+	flex-direction: column;
+	margin-left: 50px;
+	margin-right: 50px;
+	flex: 1;
+	
+}
+
+#detail-content #title{
+	font-size: 40px;
+	font-weight: bold;
+	color: black;
+	margin-bottom: 30px;
+	
+}	
+
+#detail-content #author{
+	font-family: 'courier new', sans-serif;
+	font-size: 20px;
+	margin-bottom: 30px;
+	font-style: italic;
+	color: black;
+	
+}
+
+#detail-content #published_year{
+	font-size: 17px;
+	font-weight: bold;
+	margin-bottom: 30px;
+	color: black;
+
+}
+
+#detail-content #description{
+	font-size: 17px;
+	color: black;
+	margin-bottom: 30px;
+	text-align: justify;
+	line-height: 22px;
+}
+
+.table{
+    margin: auto;
+    width: 90%;
+    text-align: center;
+}
+*/ 
