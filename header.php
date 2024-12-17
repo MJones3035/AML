@@ -34,6 +34,7 @@ if (isset($_GET['logged_out'])) {
                             <a class="nav-link" href="catalogue.php">Catalogue</a>
                             <a class="nav-link" href="add_media.php">Upload Media</a>
                             <a class="nav-link" href="delete_media.php">Delete Media</a>
+                            <a class="nav-link" href="inventory.php">Current Inventory</a>
                     </ul>
                 </div>
 
