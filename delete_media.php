@@ -47,7 +47,7 @@ if (isset($_POST['submit'])) {
                     <form action="delete.php" method="post">
                         <div class="form-group mb-3">
                             <label for="id" class="form-label">Media ID</label>
-                            <input type="text" class="form-control" id="id" name="delete_id_btn" maxlength="60"/>
+                            <input type="text" class="form-control" id="id" name="delete_id" maxlength="60"/>
                             <span class="text-danger"><?php //echo $error_name; ?></span>
                         </div>
                         <div>

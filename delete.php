@@ -2,8 +2,8 @@
 
 include 'database.php';
 
-if(isset($_POST['delete_id_btn'])){
-    $id = $_POST['delete_id_btn'];
+if(isset($_POST['delete_id'])){
+    $id = $_POST['delete_id'];
 
     //$query = "DELETE FROM media_details WHERE id='$id' ";
     //$query_run = mysqli_query($db_conn, $query);
