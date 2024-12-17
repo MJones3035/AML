@@ -9,7 +9,7 @@ if(isset($_GET['id'])&& isset($_GET['borrow_type']))
     mysqli_query($db_conn, $query);
     $query1 = "UPDATE media SET stock = stock-1 WHERE media_id = $media_id ;";
 	mysqli_query($db_conn, $query1);
-    header("Location: user_index.php");
+    header("Location: current_loan.php");
     exit;
 }
 
