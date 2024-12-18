@@ -1,6 +1,6 @@
 <?php
 
-class MediaUpdateTest extends PHPUnit\Framework\TestCase
+class MediaFavouriteTest extends PHPUnit\Framework\TestCase
 {
     public function testUpdateFavourite()
     {
