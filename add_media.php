@@ -44,23 +44,6 @@ if (isset($_POST['submit'])) {
         $error_type = "Invalid type";
         $all_fields = FALSE;
     }
-
-    //function call
-    if ($all_fields == TRUE) {
-
-        //var_dump($data);
-        //echo nameExists($name);
-
-        if (!does_name_exist($name)) {
-            // creates user account
-            $createMedia = create_media($data);
-
-            header('Location: index.php?created_media=' . $createMedia);
-
-        } else {
-            $error_name = "Media already exists";
-        }
-    }
 }
 
 ?>
