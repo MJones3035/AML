@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 //redo
 //include_once "upload.php";
 

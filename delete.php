@@ -1,5 +1,7 @@
+<html>
+<?php include("header.php"); ?>
 <?php
-
+session_start();
 include 'database.php';
 
 if(isset($_POST['delete_id'])){
@@ -33,3 +35,6 @@ if(isset($_POST['delete_id'])){
 //hanging connection closed
 $db_conn->close();
 ?>
+<?php include("footer.php"); ?>
+</html>
+

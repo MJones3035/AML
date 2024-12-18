@@ -19,7 +19,9 @@
     <!--
     <div class="cats">
         <ul>
-            <?php while ($row = mysqli_fetch_assoc($types)) { ?>
+            <?php 
+            session_start();
+            while ($row = mysqli_fetch_assoc($types)) { ?>
                 <li>
                     <a href="media.php?type=<?php echo $row['media_type_id']; ?>&search=<?php echo $_SESSION['search_query']; ?>">
                         <?php echo $row['media_type']; ?>

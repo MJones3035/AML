@@ -1,6 +1,8 @@
+<html>
+<?php include("header.php"); ?>
 <?php
 include 'database.php';
-
+session_start();
 //define upload target on server:
 $targetDir = "uploads/";
 
@@ -31,3 +33,5 @@ else{
 //hanging connection closed
 $db_conn->close();
 ?>
+<?php include("footer.php"); ?>
+</html>

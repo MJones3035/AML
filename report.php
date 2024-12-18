@@ -1,4 +1,5 @@
 <html>
+<?php include("header.php"); ?>
     <body>
     <?php
     session_start();
@@ -34,5 +35,6 @@
 ?>
 
     </body>
+    <?php include("footer.php"); ?>
 </html>
 
