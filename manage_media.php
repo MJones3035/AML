@@ -1,10 +1,9 @@
 <?php
 include_once("user_sql.php");
 
-
 function get_media_inventory() {
     $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-    $sql = 'SELECT * FROM media_details';
+    $sql = 'SELECT * FROM media';
     $result = $conn->query($sql);
     $media_inventory = [];
     while ($row = $result->fetch_assoc()) {
@@ -14,24 +13,27 @@ function get_media_inventory() {
     return $media_inventory;
 }
 
-function add_media($title, $author, $year, $genre, $type) {
+function add_media($cover_img, $title, $author, $year, $description, $stock, $media_type_id, $favourite) {
     $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-    $sql = 'INSERT INTO media_details (title, author, year, genre, type) VALUES (?, ?, ?, ?, ?)';
+    $sql = 'INSERT INTO media (cover_img, title, author, published_year, description, stock, media_type_id, favourite) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ssiss', $title, $author, $year, $genre, $type);
+    $stmt->bind_param('sssssiis', $cover_img, $title, $author, $year, $description, $stock, $media_type_id, $favourite);
     $stmt->execute();
     $stmt->close();
     $conn->close();
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_media'])) {
+    $cover_img = filter_input(INPUT_POST, 'cover_img', FILTER_SANITIZE_SPECIAL_CHARS);
     $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
     $author = filter_input(INPUT_POST, 'author', FILTER_SANITIZE_SPECIAL_CHARS);
     $year = filter_input(INPUT_POST, 'year', FILTER_SANITIZE_NUMBER_INT);
-    $genre = filter_input(INPUT_POST, 'genre', FILTER_SANITIZE_SPECIAL_CHARS);
-    $type = filter_input(INPUT_POST, 'type', FILTER_SANITIZE_SPECIAL_CHARS);
+    $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_SPECIAL_CHARS);
+    $stock = filter_input(INPUT_POST, 'stock', FILTER_SANITIZE_NUMBER_INT);
+    $media_type_id = filter_input(INPUT_POST, 'media_type_id', FILTER_SANITIZE_NUMBER_INT);
+    $favourite = filter_input(INPUT_POST, 'favourite', FILTER_SANITIZE_SPECIAL_CHARS);
 
-    add_media($title, $author, $year, $genre, $type);
+    add_media($cover_img, $title, $author, $year, $description, $stock, $media_type_id, $favourite);
     header('Location: manage_media.php');
     exit;
 }
@@ -39,9 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_media'])) {
 $media_inventory = get_media_inventory();
 
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,46 +53,33 @@ $media_inventory = get_media_inventory();
                 <thead>
                     <tr>
                         <th>Media ID</th>
+                        <th>Cover Image</th>
                         <th>Title</th>
                         <th>Author</th>
                         <th>Year</th>
-                        <th>Genre</th>
-                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Stock</th>
+                        <th>Media Type</th>
+                        <th>Favourite</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($media_inventory as $media): ?>
                         <tr>
                             <td><?php echo htmlspecialchars($media['media_id']); ?></td>
+                            <td><?php echo htmlspecialchars($media['cover_img']); ?></td>
                             <td><?php echo htmlspecialchars($media['title']); ?></td>
                             <td><?php echo htmlspecialchars($media['author']); ?></td>
-                            <td><?php echo htmlspecialchars($media['year']); ?></td>
-                            <td><?php echo htmlspecialchars($media['genre']); ?></td>
-                            <td><?php echo htmlspecialchars($media['type']); ?></td>
+                            <td><?php echo htmlspecialchars($media['published_year']); ?></td>
+                            <td><?php echo htmlspecialchars($media['description']); ?></td>
+                            <td><?php echo htmlspecialchars($media['stock']); ?></td>
+                            <td><?php echo htmlspecialchars($media['media_type_id']); ?></td>
+                            <td><?php echo htmlspecialchars($media['favourite']); ?></td>
                         </tr>
                     <?php endforeach; ?>
-                    <form method="post">
-                    <tr>
-                            <td></td>
-                            <td><input type="text" class="form-control" name="title" placeholder="Title" required></td>
-                            <td><input type="text" class="form-control" name="author" placeholder="Author" required></td>
-                            <td><input type="number" class="form-control" name="year" placeholder="Year" required></td>
-                            <td><input type="text" class="form-control" name="genre" placeholder="Genre" required></td>
-                            <td>
-                                <select class="form-control" name="type" id="type" required>
-                                    <option value="Book">Book</option>
-                                    <option value="Game">Game</option>
-                                    <option value="Movie">Movie</option>
-                                    <option value="Music">Music</option>
-                                </select>
-                            </td>
-                            <td><button type="submit" name="add_media" class="btn btn-primary">Add Media</button></td>
-                        </form>
-                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <?php include("footer.php"); ?>
 </body>
 </html>
