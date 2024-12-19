@@ -9,7 +9,10 @@ What is the most suitable architectural style for the scope of this project whil
 Monolithic Architecture
 
 ## Reason for choice
-With the current scope of the project, which focuses on building a proof of concept that will be in a relatively contained system, a monolithic architecture provides the simplicity and the speed for rapid development. The proof of concept does not require complexity or the distributed nature of other architectures like microservices. All components will be in a single code base making it much easier for us to manage, deploy and test.
+With the current scope of the project, which focuses on building a proof of concept that will be in a relatively contained system,
+ a monolithic architecture provides the simplicity and the speed for rapid development.
+The proof of concept does not require complexity or the distributed nature of other architectures like microservices.
+All components will be in a single code base making it much easier for us to manage, deploy and test.
 
 ## Pros:
 * Simplicity and speed of development
