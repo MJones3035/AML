@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
 
     if (empty($_POST['file'])) {
 
-        $error_file = "Image Url is mandatory";
+        $error_file = "File is mandatory";
 
         $all_fields = FALSE;
     } elseif (!$file) {
