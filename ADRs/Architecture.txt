@@ -1,0 +1,42 @@
+## Context and Problem Statement
+
+What is the most suitable architectural style for the scope of this project while still considering maintainability, scalability and ease of development?
+
+## Considered Options
+
+* Monolithic
+* Microservices
+
+## Decision Outcome
+
+Monolithic Architecture
+
+## Reason for choice
+With the current scope of the project, which focuses on building a proof of concept that will be in a relatively contained system, a monolithic architecture provides the simplicity and the speed for rapid development. The proof of concept does not require complexity or the distributed nature of other architectures like microservices. All components will be in a single code base making it much easier for us to manage, deploy and test.
+
+## Pros:
+* Simplicity and speed of development
+* Easier to deploy
+* Less complex testing and debugging
+
+## Cons:
+* As the system grows according to more needs, it may become harder to maintain and scale.
+* Tight coupling between components can make it hard to update the overall system.
+* Limited flexibility compared to other architectures.
+
+
+## Other Choice
+
+Microservices Architecture
+
+## Pros:
+
+* High scalability
+* Easier to update and deploy individual “services” without affecting the entire system.
+* More suitable for large, growing complex systems
+
+## Cons:
+
+* Massive overhead in managing multiple services, this includes the deployment and communication between those services.
+* Increased complexity in debugging and testing.
+* Requires more resources, both time and expertise, to implement effectively.
