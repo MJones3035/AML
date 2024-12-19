@@ -1,0 +1,60 @@
+## Context and problem 
+What is the correct choice of database system for the scope of the project?
+
+## Considered Options
+*  MariaDB
+* SQLite
+* PostgreSQL
+
+## Decision Outcome
+MariaDB
+https://mariadb.org/
+
+
+## Reason of choice
+The nature of the advanced media library system would suit this database system due to the ease of use because of the MyPHPAdmin interface as well as it being familiar.
+ A more performant and scalable system than this is not necessary with the scope of the current project and proof of concept.
+
+## Pros
+*  Has a user friendly interface via MyPHPAdmin
+* Is vertically scalable, requiring less servers
+* Familiarity
+
+## Cons
+* Lacks debugging tools due it being community supported
+	
+## Other Choice
+SQLite
+https://www.sqlite.org/
+
+## Pros
+* Small languages features, so less complexity 
+* Fast performance as it is lightweight
+
+## Cons
+* Not scalable, designed for small databases
+* May lack desired functions due to it having few features
+
+## Other Choice
+ PostgreSQL
+https://www.postgresql.org/
+
+## Pros
+*  A Lot of features, has a JSON data type
+* Is more performant overall than MariaDB
+
+## Cons
+* Hard to implement
+
+## Other Choice
+ MySQL
+https://www.mysql.com/
+
+## Pros
+
+## Cons
+* Less features than MariaDB
+
+## More Information
+MariaDB and PostGRESQL comparison: 
+Amazon Web Services. (2023). What’s the difference between mariadb and postgresql? Amazon Web Services, Inc. https://aws.amazon.com/compare/the-difference-between-mariadb-and-postgresql/
