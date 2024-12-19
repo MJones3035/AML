@@ -4,7 +4,7 @@ include('database.php');
 
 if (!defined('APP_URL')) {
     define('APP_URL', 'http://localhost/AML');
-    define('SENDER_EMAIL_ADDRESS', 'aml195391@gmail.com');  // password = G12?Zq89v>
+    define('SENDER_EMAIL_ADDRESS', 'aml195391@gmail.com');
 
     // init_set()
 }
@@ -110,7 +110,7 @@ function send_email(string $email, string $subject, string $message): string {
         $mail->Host       = 'smtp.gmail.com';                    
         $mail->SMTPAuth   = true;                             
         $mail->Username   = SENDER_EMAIL_ADDRESS;                 
-        $mail->Password   = 'khxfnlzqmuygieti';           
+        $mail->Password   = '';  // hidden         
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;                              
         $mail->Port       = 587;  
     
