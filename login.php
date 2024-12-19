@@ -11,30 +11,61 @@ if (isset($_POST['submit'])) {
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
 
     $auth_result = authorise_user($username, $password);
-    $is_active = is_user_active($auth_result['user_id']);
+    $is_active = false;
 
+    if (isset($auth_result['user_id'])) {
+        $is_active = is_user_active($auth_result['user_id']);
+    }
 
+    if ($auth_result['status'] == AuthoriseStates::MATCH) {
 
-    if ($auth_result['status'] == AuthoriseStates::MATCH and $is_active) {
-        session_regenerate_id();
-        $_SESSION['user_id'] = $auth_result['user_id']; // Store user ID in session
-        header("Location: user_index.php");
-        exit(); 
+        if (!$is_active) {
+            $error = "User not active. Please activate your account";
+        }
+        else {
+            session_regenerate_id();
+            $_SESSION['user_id'] = $auth_result['user_id']; // Store user ID in session
+            header("Location: user_index.php");
+            exit(); 
+        }
+
     } else if ($auth_result['status'] == AuthoriseStates::INVALID_PASSWORD) {
         $error = "Invalid password";
     }
-    else if (!$is_active) {
-        $error = "User not active. Please activate your account";
-    } else {
+    else {
         $error = "Invalid username and password";
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-<body class="d-flex flex-column min-vh-100">
-    <?php include("header.php"); ?>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Advanced Media Library</title>
+</head>
+<body>
+	
+	<!-- header & navigation -->
+	<section id="header">
+		<img src="images/logo.png" width="60px" height="50px">
+
+		<div>
+			<ul id="nav">
+				<li><a href="index.php">Home</a></li>
+				<li><a href="login.php" class="active">Login</a></li>
+                <li><a href="sign_up.php">Register</a></li>
+			</ul>
+		</div>
+	</section>
+	<!-- -->
+		
+	<!-- intro section -->
+	<section id="page-header">
+		<h2>Advanced Media Library</h2>
+		<p>Have a precious time with famous books</p>
+	</section>
     <main class="container pt-5 pb-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
