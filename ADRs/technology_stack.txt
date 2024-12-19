@@ -1,0 +1,43 @@
+## Context and problem
+AML requires a robust and scalable system, this requires a backend that would be suitable with further development, 
+contains an ecosystem that is well maintained and documented to allow for development.
+
+## Considered Options
+* PHP (with HTML, CSS, JS and bootstrap)
+* Python with Django
+* Laravel
+
+## Decision Outcome
+ PHP (with HTML, CSS, JS and bootstrap)
+
+## Pros
+* Familiarity with PHP allows for rapid development therefore quicker turnout for the proof of concept
+* PHP is well established on multiple websites showcasing its scalability.
+
+## Cons
+* Lack of debugging tools makes certain issues hard to solve
+
+##Other Choice
+NodeJS + React
+
+## Pros
+* NodeJS and React are inherently good for scalability with Node having vertical and horizontal scaling while Reacts components allows for reusability further improving 
+* Lack of knowledge of these frameworks will make a proof of concept and development very difficult
+## Cons
+
+## Other Choice
+Python with Django
+
+## Pros 
+* Is based on the the MVC architecture creating structure within the system that allows for cleaner, reusable code
+* The steep learning curve makes it difficult for us to work with.
+
+## Other Choice
+Laravel
+
+## Pros
+* MVC architecture so is scalable and easy to test
+* Has built in framework features like security
+
+## Cons
+* You have to learn how to work with the framework and so a steeper learning curve

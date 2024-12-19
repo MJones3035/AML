@@ -1,7 +1,7 @@
 <?php
 include_once("user_sql.php");
 
-session_start(); 
+session_start();
 
 $error_username = $error_password = $error = "";
 
@@ -21,28 +21,31 @@ if (isset($_POST['submit'])) {
 
         if (!$is_active) {
             $error = "User not active. Please activate your account";
-        }
-        else {
+        } else {
             session_regenerate_id();
             $_SESSION['user_id'] = $auth_result['user_id']; // Store user ID in session
             header("Location: user_index.php");
-            exit(); 
+            exit();
         }
-
     } else if ($auth_result['status'] == AuthoriseStates::INVALID_PASSWORD) {
         $error = "Invalid password";
-    }
-    else {
+    } else {
         $error = "Invalid username and password";
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-<body class="d-flex flex-column min-vh-100">
-    <?php include("header.php"); ?>
+<html>
+<?php include("header.php") ?>
+
+<body>
+
+
+
+
     <main class="container pt-5 pb-5">
+
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="login-form-container border p-4 rounded shadow">
@@ -65,11 +68,7 @@ if (isset($_POST['submit'])) {
                         <div class="pb-3">
                             <p><a class="link-opacity-75" href="forgot_password.php">Forgot password?</a></p>
                         </div>
-                        <!-- <div class="form-check mb-3">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Remember me</label>
-                        </div> -->
-                        <div> 
+                        <div>
                             <button type="submit" class="btn btn-primary w-100" name="submit" value="true">Login</button>
                             <span class="text-danger"><?php echo $error; ?></span>
                         </div>
@@ -79,6 +78,8 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
     </main>
+
     <?php include("footer.php"); ?>
 </body>
+
 </html>
